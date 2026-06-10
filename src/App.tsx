@@ -262,6 +262,33 @@ export default function App() {
                     >
                       Explore Formulas
                     </button>
+                    <a
+                      href="https://www.effectivecpmnetwork.com/cy6kqza0?key=da63ef5ed9dd1f39cf2d3a87de42e253"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2.5 bg-indigo-650 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-lg hover:scale-[1.03] active:scale-95 transition-all duration-200 flex items-center space-x-1"
+                    >
+                      <span>Effective Net 1</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                    <a
+                      href="https://www.effectivecpmnetwork.com/r1w8jwtc?key=d90e40c314b49478cb2f5496e9288c01"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-lg hover:scale-[1.03] active:scale-95 transition-all duration-200 flex items-center space-x-1"
+                    >
+                      <span>Effective Net 2</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                    <a
+                      href="https://www.effectivecpmnetwork.com/y64k0hg8e?key=b6e031570e1ac4dcce264194b1bf0101"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-lg hover:scale-[1.03] active:scale-95 transition-all duration-200 flex items-center space-x-1"
+                    >
+                      <span>Effective Net 3</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   </div>
                 </div>
               </div>
