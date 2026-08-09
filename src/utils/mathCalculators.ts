@@ -776,6 +776,128 @@ export const solveAptitudeProblem = (topicId: string, inputs: Record<string, str
       };
     }
 
+    case "grammar": {
+      const val = inputs.ruleType || "Subject-Verb Agreement";
+      steps.push(`Selected rule: ${val}`);
+      if (val === "Subject-Verb Agreement") {
+        steps.push(`Rule: Singular subjects take singular verbs; plural subjects take plural verbs.`);
+        steps.push(`Example Error: 'Every one of the students have completed the test.'`);
+        steps.push(`Correction: 'Every one of the students has completed the test.'`);
+        return {
+          answer: "Correct Verb: 'has' (Subject: 'Every one')",
+          steps,
+          formula: "Subject-Verb Agreement"
+        };
+      } else if (val === "Modifiers") {
+        steps.push(`Rule: Modifiers must be placed next to the word they describe.`);
+        steps.push(`Example Error: 'Walking down the road, the library came into view.'`);
+        steps.push(`Correction: 'Walking down the road, I saw the library.'`);
+        return {
+          answer: "Place modifier next to correct subject",
+          steps,
+          formula: "Dangling Modifiers"
+        };
+      } else {
+        steps.push(`Rule: Maintain tense consistency throughout standard clauses.`);
+        steps.push(`Example Error: 'She finished her work and starts playing.'`);
+        steps.push(`Correction: 'She finished her work and started playing.'`);
+        return {
+          answer: "Align verbs to same tense",
+          steps,
+          formula: "Tense Consistency"
+        };
+      }
+    }
+
+    case "synonyms-antonyms": {
+      const word = inputs.wordSelect || "diligent";
+      steps.push(`Word: ${word}`);
+      if (word === "diligent") {
+        steps.push(`Synonyms: Industrious, Hardworking, Assiduous`);
+        steps.push(`Antonyms: Lazy, Idle, Negligent`);
+        return {
+          answer: "Synonym: Industrious | Antonym: Lazy",
+          steps,
+          formula: "Vocabulary"
+        };
+      } else if (word === "abundant") {
+        steps.push(`Synonyms: Plentiful, Ample, Copious`);
+        steps.push(`Antonyms: Scarce, Sparse, Deficient`);
+        return {
+          answer: "Synonym: Plentiful | Antonym: Scarce",
+          steps,
+          formula: "Vocabulary"
+        };
+      } else {
+        steps.push(`Synonyms: Transient, Fleeting, Evanescent`);
+        steps.push(`Antonyms: Permanent, Eternal, Lasting`);
+        return {
+          answer: "Synonym: Transient | Antonym: Permanent",
+          steps,
+          formula: "Vocabulary"
+        };
+      }
+    }
+
+    case "reading-comprehension": {
+      const passage = inputs.passageSelect || "Technology in Education";
+      steps.push(`Selected Passage topic: ${passage}`);
+      steps.push(`Critical analysis rule: Locate central themes in early topic sentences.`);
+      steps.push(`Tactic: Scan transition keywords (however, furthermore, consequently) to map logic shifts.`);
+      return {
+        answer: "Strategy: Structure analysis via active skimming",
+        steps,
+        formula: "Comprehension Analysis"
+      };
+    }
+
+    case "tables": {
+      const val1 = Number(inputs.yearOne) || 0;
+      const val2 = Number(inputs.yearTwo) || 0;
+      if (val1 === 0) {
+        return {
+          answer: "Year 1 cannot be zero",
+          steps: ["Cannot solve: Initial value must be non-zero."],
+          formula: "Growth Rate"
+        };
+      }
+      const diff = val2 - val1;
+      const pct = (diff / val1) * 100;
+      steps.push(`Step 1: Get difference: ${val2} - ${val1} = ${diff}`);
+      steps.push(`Step 2: Divide by initial value: ${diff} / ${val1} = ${(diff/val1).toFixed(4)}`);
+      steps.push(`Step 3: Convert to percentage: ${(diff/val1).toFixed(4)} * 100 = ${pct.toFixed(2)}%`);
+      return {
+        answer: `Growth Rate = ${pct.toFixed(2)}%`,
+        steps,
+        formula: "Growth = (Diff / Initial) * 100"
+      };
+    }
+
+    case "bar-graphs": {
+      const valA = Number(inputs.valA) || 0;
+      const valB = Number(inputs.valB) || 0;
+      const avg = (valA + valB) / 2;
+      steps.push(`Step 1: Compute sum of categories: ${valA} + ${valB} = ${valA + valB}`);
+      steps.push(`Step 2: Divide by category count (2): ${valA + valB} / 2 = ${avg}`);
+      return {
+        answer: `Average Value = ${avg.toFixed(2)}`,
+        steps,
+        formula: "Average = (CatA + CatB) / 2"
+      };
+    }
+
+    case "pie-charts": {
+      const val = Number(inputs.sharePct) || 0;
+      const deg = (val / 100) * 360;
+      steps.push(`Step 1: Divide share percentage by 100: ${val} / 100 = ${val / 100}`);
+      steps.push(`Step 2: Multiply by 360 degrees: ${val / 100} * 360 = ${deg.toFixed(2)}`);
+      return {
+        answer: `Degree Share = ${deg.toFixed(2)}°`,
+        steps,
+        formula: "Degrees = (Share / 100) * 360"
+      };
+    }
+
     default:
       return {
         answer: "Calculator not implemented yet",

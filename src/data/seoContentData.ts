@@ -100,7 +100,7 @@ export const HOMEPAGE_SEO_CONTENT = {
 };
 
 export const CATEGORIES_SEO_CONTENT: Record<string, SEOBlock> = {
-  "quantitative": {
+  "quantitative-aptitude": {
     title: "Quantitative Aptitude Preparation Guide",
     subtitle: "Master Math Shortcuts, Solved Examples, and Core Concepts",
     content: [
@@ -109,34 +109,7 @@ export const CATEGORIES_SEO_CONTENT: Record<string, SEOBlock> = {
       "For example, calculating compound interest compounded semi-annually or quarterly can quickly become tedious. Our platform shows you how to use effective interest rate percentage formulas to convert compound interest problems into simple multiplications. Explore our topic-specific guides to master these formulas, view detailed solved examples, and utilize interactive solvers to check your progress."
     ]
   },
-  "word-problems": {
-    title: "Word Problems & Arithmetic Applications",
-    subtitle: "Decipher Complex Text Scenarios and Formulate Equations",
-    content: [
-      "Word problems are mathematical questions presented as a narrative rather than a simple equation. These include popular aptitude topics like Time, Speed & Distance, Problems on Trains, Boats & Streams, Pipes & Cisterns, and Time & Work.",
-      "The main challenge in word problems is translating the English text into a mathematical model. Candidates often fail to correctly assign variables or identify relative quantities (such as relative speed or combined work rates). Our interactive calculators resolve this by prompting you for the exact inputs required.",
-      "Our Time and Work module teaches the Unitary Method and the LCM Method. While the unitary method represents work as a fraction, the LCM method converts work into 'total units of work,' making calculation much faster and less prone to fractional mistakes. Learn these strategies and apply them directly to solve placement questions."
-    ]
-  },
-  "finance": {
-    title: "Financial Mathematics & Business Calculations",
-    subtitle: "Understand Interest, Profit, Loss, Discount, and Investment Math",
-    content: [
-      "Financial aptitude is highly valued in banking recruitment (IBPS, SBI PO, RBI Grade B) and corporate consulting roles. It requires a firm grip on Simple Interest, Compound Interest, Profit & Loss, Partnerships, and Stock valuations.",
-      "Understanding compound interest (CI) is critical as it deals with the concept of 'interest on interest.' In business scenarios, you must also be familiar with marked prices and successive discounts. A common error is simply adding successive discount percentages (e.g. thinking 20% and 10% successive discounts equal a single 30% discount, whereas the actual effective discount is 28%).",
-      "Our business calculators and explanations break down compound interest compounding frequencies (annually, semi-annually, quarterly, and monthly) and successive discounts. Review the step-by-step guides to gain deep business arithmetic insights."
-    ]
-  },
-  "math-logic": {
-    title: "Mathematical Logic & Quantitative Reasonings",
-    subtitle: "Develop Analytical Thinking, Logical Deduction, and Mathematical Proofs",
-    content: [
-      "Math logic refers to the intersection of mathematical operations and logical deduction. It includes topics like number systems, series completion, logical grids, and clock/calendar problems.",
-      "Developing a high quantitative logic ability allows you to detect patterns quickly. In placement tests, series completion and coding-decoding questions test this exact skill. Success depends on recognizing square, cube, prime number, or arithmetic progression intervals.",
-      "Our guides explain the mathematical theorems governing prime numbers, divisibility tests, and series patterns. Train your brain with our analytical concepts to solve puzzles efficiently."
-    ]
-  },
-  "reasoning": {
+  "logical-reasoning": {
     title: "Logical Reasoning & Placement Preparation",
     subtitle: "Crack Puzzles, Seating Arrangements, Blood Relations, and Syllogisms",
     content: [

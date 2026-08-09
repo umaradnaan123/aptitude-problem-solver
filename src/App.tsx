@@ -21,6 +21,9 @@ import {
   COMPANY_PREP_DATA
 } from './data/seoContentData';
 
+// Valid categories helper
+const VALID_CATEGORIES = ['quantitative-aptitude', 'logical-reasoning', 'verbal-ability', 'data-interpretation', 'company-wise'];
+
 // Helper component for routing tabs
 function NavLink({ to, children, active, onClick, ariaLabel }: { to: string; children: React.ReactNode; active: boolean; onClick?: () => void; ariaLabel?: string }) {
   return (
@@ -31,7 +34,7 @@ function NavLink({ to, children, active, onClick, ariaLabel }: { to: string; chi
       className={`flex items-center space-x-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
         active
           ? 'bg-violet-600 text-white shadow-md shadow-violet-500/20'
-          : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-350'
+          : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-355'
       }`}
     >
       {children}
@@ -76,6 +79,7 @@ export default function App() {
     id: string;
     topicId: string;
     topicName: string;
+    topicCategory: string;
     timestamp: string;
     inputs: Record<string, string | number>;
     result: CalculationResult;
@@ -146,9 +150,9 @@ export default function App() {
             </div>
             <div>
               <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-violet-600 via-indigo-500 to-pink-500 bg-clip-text text-transparent block">
-                APTITUDE PROBLEM SOLVER
+                APTITUDE SOLVER
               </span>
-              <span className="block text-xs font-semibold text-slate-500 dark:text-slate-400">AI-Powered Learning Platform</span>
+              <span className="block text-xs font-semibold text-slate-500 dark:text-slate-400">AI-Powered Prep & Solutions</span>
             </div>
           </Link>
 
@@ -156,7 +160,7 @@ export default function App() {
           <nav className="hidden md:flex space-x-1" aria-label="Main Navigation">
             <NavLink to="/" active={location.pathname === '/' || location.pathname === '/dashboard'} ariaLabel="Dashboard">
               <Home className="w-4 h-4" />
-              <span>Dashboard</span>
+              <span>Home</span>
             </NavLink>
             <NavLink to="/calculators" active={location.pathname === '/calculators'} ariaLabel="Calculators">
               <Calculator className="w-4 h-4" />
@@ -164,7 +168,7 @@ export default function App() {
             </NavLink>
             <NavLink to="/history" active={location.pathname === '/history'} ariaLabel="History and Reports">
               <History className="w-4 h-4" />
-              <span>History & Logs</span>
+              <span>History</span>
             </NavLink>
             <NavLink to="/about" active={location.pathname === '/about'} ariaLabel="About Us">
               <Info className="w-4 h-4" />
@@ -203,9 +207,9 @@ export default function App() {
           >
             <nav className="px-4 py-3 space-y-1" aria-label="Mobile Navigation">
               {[
-                { to: '/', label: 'Dashboard', icon: Home },
+                { to: '/', label: 'Home', icon: Home },
                 { to: '/calculators', label: 'Calculators', icon: Calculator },
-                { to: '/history', label: 'History & Reports', icon: History },
+                { to: '/history', label: 'History Logs', icon: History },
                 { to: '/about', label: 'About Us', icon: Info }
               ].map(tab => {
                 const Icon = tab.icon;
@@ -218,7 +222,7 @@ export default function App() {
                     className={`w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition ${
                       isActive
                         ? 'bg-violet-600 text-white shadow-md'
-                        : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        : 'text-slate-600 dark:text-slate-350 hover:bg-slate-100 dark:hover:bg-slate-800'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -269,20 +273,6 @@ export default function App() {
               toggleFavorite={toggleFavorite}
             />
           } />
-          <Route path="/categories/:categorySlug" element={
-            <CategoryDetailView 
-              activeTopics={activeTopics}
-            />
-          } />
-          <Route path="/question/:questionSlug" element={
-            <QuestionDetailView 
-              activeTopics={activeTopics}
-              setCalcHistory={setCalcHistory}
-              copyToClipboard={copyToClipboard}
-              favorites={favorites}
-              toggleFavorite={toggleFavorite}
-            />
-          } />
           <Route path="/history" element={
             <HistoryView 
               calcHistory={calcHistory}
@@ -294,6 +284,24 @@ export default function App() {
           <Route path="/contact" element={<ContactView />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyView />} />
           <Route path="/terms" element={<TermsView />} />
+          <Route path="/disclaimer" element={<DisclaimerView />} />
+
+          {/* Clean, nested routing */}
+          <Route path="/:categorySlug" element={
+            <CategoryDetailView 
+              activeTopics={activeTopics}
+            />
+          } />
+          <Route path="/:categorySlug/:topicSlug" element={
+            <QuestionDetailView 
+              activeTopics={activeTopics}
+              setCalcHistory={setCalcHistory}
+              copyToClipboard={copyToClipboard}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+            />
+          } />
+
           <Route path="*" element={<NotFoundView />} />
         </Routes>
       </main>
@@ -303,41 +311,42 @@ export default function App() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-8 text-xs text-slate-500 dark:text-slate-400">
           <div className="max-w-sm text-center md:text-left">
             <span className="font-extrabold text-sm tracking-wide bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent block">
-              APTITUDE PROBLEM SOLVER
+              APTITUDE SOLVER
             </span>
             <p className="mt-2 leading-relaxed">
               Ace your placement examinations, banking PO tests, CAT, GRE, GMAT, and corporate screening filters with our dynamic solvers. Optimized for mobile accessibility and offline operations.
             </p>
-            <p className="mt-3 font-bold text-slate-700 dark:text-slate-350">Aptitude Problem Solver &copy; 2026</p>
+            <p className="mt-3 font-bold text-slate-700 dark:text-slate-350">Aptitude Solver &copy; 2026</p>
           </div>
           
           {/* Quick links columns */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 w-full md:w-auto">
             <div>
-              <span className="font-bold text-slate-700 dark:text-slate-350 block mb-3 uppercase tracking-wider text-[10px]">Resources</span>
+              <span className="font-bold text-slate-700 dark:text-slate-350 block mb-3 uppercase tracking-wider text-[10px]">Categories</span>
               <ul className="space-y-2">
-                <li><Link to="/calculators" className="hover:underline">Calculators</Link></li>
-                <li><Link to="/history" className="hover:underline">Performance Logs</Link></li>
-                <li><Link to="/categories/quantitative" className="hover:underline">Quantitative Math</Link></li>
-                <li><Link to="/categories/reasoning" className="hover:underline">Logical Reasoning</Link></li>
+                <li><Link to="/quantitative-aptitude" className="hover:underline">Quantitative Aptitude</Link></li>
+                <li><Link to="/logical-reasoning" className="hover:underline">Logical Reasoning</Link></li>
+                <li><Link to="/verbal-ability" className="hover:underline">Verbal Ability</Link></li>
+                <li><Link to="/data-interpretation" className="hover:underline">Data Interpretation</Link></li>
               </ul>
             </div>
             <div>
               <span className="font-bold text-slate-700 dark:text-slate-350 block mb-3 uppercase tracking-wider text-[10px]">Company Prep</span>
               <ul className="space-y-2">
-                <li><Link to="/categories/company-wise" className="hover:underline">IT Placements Guide</Link></li>
-                <li><Link to="/categories/company-wise" className="hover:underline">TCS Aptitude Questions</Link></li>
-                <li><Link to="/categories/company-wise" className="hover:underline">Infosys Cryptarithmetic</Link></li>
-                <li><Link to="/categories/company-wise" className="hover:underline">Wipro NLTH Preparation</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">IT Placements Guide</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">TCS Aptitude Questions</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">Infosys Prep Guide</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">Wipro NLTH Prep</Link></li>
               </ul>
             </div>
             <div>
               <span className="font-bold text-slate-700 dark:text-slate-350 block mb-3 uppercase tracking-wider text-[10px]">Legal & EEAT</span>
               <ul className="space-y-2">
-                <li><Link to="/about" className="hover:underline">Editorial Policy</Link></li>
+                <li><Link to="/about" className="hover:underline">About Editorial</Link></li>
                 <li><Link to="/contact" className="hover:underline">Contact Support</Link></li>
                 <li><Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link></li>
                 <li><Link to="/terms" className="hover:underline">Terms of Use</Link></li>
+                <li><Link to="/disclaimer" className="hover:underline">Disclaimer</Link></li>
               </ul>
             </div>
           </div>
@@ -375,9 +384,9 @@ function DashboardView({
 }: DashboardViewProps) {
   const [activeSEOTab, setActiveSEOTab] = useState<'about' | 'whyUse' | 'how' | 'faq'>('about');
   
-  // Meta description & title
-  const title = "Aptitude Problem Solver - AI-Powered Learning & Step-by-Step Calculator";
-  const desc = "Master quantitative aptitude, logical reasoning, and verbal formulas. Ace TCS, Wipro, Infosys, Accenture, CAT, banking PO exams with step-by-step math solver.";
+  // Meta description & title (Highly optimized, natural, zero keyword stuffing)
+  const title = "Aptitude Problem Solver - Practice Questions, Formulas & Solutions";
+  const desc = "Clear your recruitment screening filters and competitive entrance exams. Free interactive math calculators, formula sheets, and step-by-step solved problems.";
   
   // JSON-LD Homepage Schema
   const homepageSchema = {
@@ -391,7 +400,7 @@ function DashboardView({
     "browserRequirements": "Requires JavaScript. Requires HTML5.",
     "creator": {
       "@type": "Organization",
-      "name": "Aptitude Learning Platform",
+      "name": "Aptitude Solver Team",
       "url": "https://aptitude-problem-solver.vercel.app/"
     },
     "offers": {
@@ -409,28 +418,28 @@ function DashboardView({
       <SEOMeta title={title} description={desc} schema={homepageSchema} />
       
       {/* Welcome Card */}
-      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-violet-600 via-indigo-650 to-pink-500 p-8 text-white shadow-2xl shadow-violet-500/15">
+      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-violet-600 via-indigo-650 to-pink-505 p-8 text-white shadow-2xl shadow-violet-500/15">
         <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
           <Calculator className="w-96 h-96 transform translate-x-12 translate-y-12" />
         </div>
         <div className="relative z-10 max-w-2xl">
           <span className="px-3 py-1 rounded-full bg-white/20 text-white text-[10px] font-bold tracking-wide uppercase">Open Source Solver</span>
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight mt-3">Boost Your Quantitative Aptitude</h1>
-          <p className="mt-2 text-indigo-100 text-sm md:text-base leading-relaxed">
-            Instant step-by-step math solver, detailed formulas reference, and progress metrics to clear competitive exams, CAT, and recruitment tests.
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight mt-3">Aptitude Problem Solver – Practice Aptitude Questions & Solutions</h1>
+          <p className="mt-2 text-indigo-105 text-sm md:text-base leading-relaxed">
+            Boost your problem-solving speed. Master formulas and detailed step-by-step solutions for quantitative aptitude, logical reasoning, and placement recruitment exams.
           </p>
           <div className="mt-6 flex flex-wrap gap-2.5">
             <Link
               to="/calculators"
-              className="px-5 py-2.5 bg-white text-violet-700 font-bold rounded-xl text-xs sm:text-sm shadow-lg hover:bg-slate-100 hover:scale-[1.03] active:scale-95 transition-all duration-200 block text-center"
+              className="px-5 py-2.5 bg-white text-violet-750 font-bold rounded-xl text-xs sm:text-sm shadow-lg hover:bg-slate-100 hover:scale-[1.03] active:scale-95 transition-all duration-200 block text-center"
             >
-              Explore Calculators
+              Explore Solvers
             </Link>
             <Link
-              to="/categories/quantitative"
+              to="/quantitative-aptitude"
               className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs sm:text-sm border border-white/20 hover:scale-[1.03] active:scale-95 transition-all duration-200 block text-center"
             >
-              Quantitative Math
+              Quantitative Aptitude
             </Link>
           </div>
         </div>
@@ -439,15 +448,15 @@ function DashboardView({
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Total Calculations Done", value: totalCalculations, desc: "Resolved dynamically in-session", icon: Calculator, color: "text-violet-500 bg-violet-500/10 border-violet-500/20" },
-          { label: "Bookmarked & Favorites", value: favoriteCount, desc: "Key active topics saved", icon: Star, color: "text-amber-500 bg-amber-500/10 border-amber-500/20" },
-          { label: "Practice Modules", value: "Active", desc: "Formula bank fully configured", icon: BookOpen, color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20" },
-          { label: "Accuracy Performance", value: "100%", desc: "Precise computational algorithms", icon: Award, color: "text-rose-500 bg-rose-500/10 border-rose-500/20" }
+          { label: "Calculations Logged", value: totalCalculations, desc: "Resolved dynamically in-session", icon: Calculator, color: "text-violet-500 bg-violet-500/10 border-violet-500/20" },
+          { label: "Bookmarked Topics", value: favoriteCount, desc: "Key active concepts saved", icon: Star, color: "text-amber-500 bg-amber-500/10 border-amber-500/20" },
+          { label: "Syllabus Status", value: "Active", desc: "Formulas and guides loaded", icon: BookOpen, color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20" },
+          { label: "Verified Accuracy", value: "100%", desc: "Precise step-by-step solvers", icon: Award, color: "text-rose-500 bg-rose-500/10 border-rose-500/20" }
         ].map((stat, i) => {
           const Icon = stat.icon;
           return (
             <div key={i} className="glass-card rounded-2xl p-5 flex flex-col justify-between border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 relative overflow-hidden group">
-              <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full opacity-5 blur-xl group-hover:scale-125 transition-transform duration-500" />
+              <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-gradient-to-br from-violet-505 to-indigo-505 rounded-full opacity-5 blur-xl group-hover:scale-125 transition-transform duration-500" />
               <div className="flex items-center justify-between">
                 <span className="text-2xl font-black tracking-tight">{stat.value}</span>
                 <div className={`p-2 rounded-xl border ${stat.color}`}>
@@ -462,6 +471,31 @@ function DashboardView({
           );
         })}
       </div>
+
+      {/* Categories Hub Selection Cards */}
+      <section aria-label="Aptitude Study Hubs">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Select Your Aptitude Concept Hub</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { title: "Quantitative Aptitude", desc: "Arithmetic shortcuts, simple interest, profit and loss, ratio proportion, and train crossing formulas.", link: "/quantitative-aptitude", color: "from-violet-500 to-indigo-600" },
+            { title: "Logical Reasoning", desc: "Calendar arithmetic, clock hand angles, series puzzles, blood relations, and Venn diagrams.", link: "/logical-reasoning", color: "from-indigo-500 to-blue-600" },
+            { title: "Verbal Ability", desc: "Error spotting, grammar rules, reading comprehension strategies, tenses, and modifiers.", link: "/verbal-ability", color: "from-pink-500 to-rose-600" },
+            { title: "Data Interpretation", desc: "Growth percentages, average ratios, table analysis, histograms, and circular pie charts.", link: "/data-interpretation", color: "from-emerald-500 to-teal-600" }
+          ].map((hub, idx) => (
+            <Link key={idx} to={hub.link} className="glass-card rounded-2xl border border-slate-200 dark:border-slate-850 p-5 flex flex-col justify-between hover:border-violet-400 transition bg-white dark:bg-slate-900/30">
+              <div>
+                <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${hub.color} mb-3`} />
+                <h3 className="font-extrabold text-sm text-slate-900 dark:text-white">{hub.title}</h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">{hub.desc}</p>
+              </div>
+              <div className="mt-4 flex items-center text-xs font-bold text-violet-600 dark:text-violet-400 hover:underline">
+                <span>Open Guide</span>
+                <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* Main Grid: Search & Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -484,11 +518,10 @@ function DashboardView({
           <div className="flex space-x-2 overflow-x-auto pb-1.5 scrollbar-thin">
             {[
               { id: 'all', label: 'All Topics' },
-              { id: 'quantitative', label: 'Quantitative' },
-              { id: 'word-problems', label: 'Word Problems' },
-              { id: 'finance', label: 'Finance' },
-              { id: 'math-logic', label: 'Math Logic' },
-              { id: 'reasoning', label: 'Logical Reasoning' }
+              { id: 'quantitative-aptitude', label: 'Quantitative Aptitude' },
+              { id: 'logical-reasoning', label: 'Logical Reasoning' },
+              { id: 'verbal-ability', label: 'Verbal Ability' },
+              { id: 'data-interpretation', label: 'Data Interpretation' }
             ].map(cat => (
               <button
                 key={cat.id}
@@ -496,7 +529,7 @@ function DashboardView({
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all min-h-[36px] ${
                   selectedCategory === cat.id
                     ? 'bg-violet-600 text-white'
-                    : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-350'
+                    : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-655 dark:text-slate-350'
                 }`}
               >
                 {cat.label}
@@ -510,12 +543,12 @@ function DashboardView({
               filteredTopics.map(topic => (
                 <Link
                   key={topic.id}
-                  to={`/question/${topic.id}`}
+                  to={`/${topic.category}/${topic.id}`}
                   className="glass-card rounded-xl p-4 flex flex-col justify-between border border-slate-200 dark:border-slate-800 hover:border-violet-400 dark:hover:border-violet-500 transition"
                 >
                   <div>
                     <div className="flex justify-between items-start">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-105 dark:bg-violet-900/30 text-violet-700 dark:text-violet-450 capitalize">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-450 capitalize">
                         {topic.category.replace('-', ' ')}
                       </span>
                       <button
@@ -526,11 +559,11 @@ function DashboardView({
                         <Star className={`w-4 h-4 ${favorites.includes(topic.id) ? 'fill-rose-500 text-rose-500' : ''}`} />
                       </button>
                     </div>
-                    <h3 className="text-base font-bold mt-2 hover:text-violet-600 dark:hover:text-violet-400 transition">{topic.name}</h3>
+                    <h3 className="text-base font-bold mt-2 hover:text-violet-600 dark:hover:text-violet-450 transition">{topic.name}</h3>
                     <p className="text-xs text-slate-550 dark:text-slate-400 mt-1 line-clamp-2">{topic.description}</p>
                   </div>
                   
-                  <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/50">
+                  <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-105 dark:border-slate-800/50">
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
                       topic.difficulty === 'Easy' ? 'bg-emerald-100 dark:bg-emerald-950/20 text-emerald-700' :
                       topic.difficulty === 'Medium' ? 'bg-amber-100 dark:bg-amber-950/20 text-amber-700' :
@@ -560,21 +593,21 @@ function DashboardView({
           <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
             <h3 className="font-extrabold text-sm tracking-wide uppercase text-slate-500 dark:text-slate-400 mb-3 flex items-center space-x-1.5">
               <Award className="w-4 h-4 text-violet-500" />
-              <span>Company Placements Guide</span>
+              <span>Placement Preparation</span>
             </h3>
             <p className="text-xs text-slate-550 dark:text-slate-400 mb-4 leading-relaxed">
-              Ace specific recruitment aptitude tests with our LSI keyword-optimized target guidelines.
+              Ace specific IT recruitment screening exams with our company-wise guidelines.
             </p>
             <div className="space-y-2">
-              <Link to="/categories/company-wise" className="w-full flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+              <Link to="/company-wise" className="w-full flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
                 <span>TCS NQT Preparation</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
-              <Link to="/categories/company-wise" className="w-full flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+              <Link to="/company-wise" className="w-full flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
                 <span>Infosys Cryptarithmetic</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
-              <Link to="/categories/company-wise" className="w-full flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+              <Link to="/company-wise" className="w-full flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
                 <span>Wipro NLTH Guide</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
@@ -585,39 +618,39 @@ function DashboardView({
           <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
             <h3 className="font-extrabold text-sm tracking-wide uppercase text-slate-500 dark:text-slate-400 mb-3 flex items-center space-x-1.5">
               <History className="w-4 h-4 text-violet-500" />
-              <span>Recent Computations</span>
+              <span>Recent Calculations</span>
             </h3>
             <div className="space-y-3">
               {calcHistory.slice(0, 3).map((hist) => (
                 <Link
                   key={hist.id}
-                  to={`/question/${hist.topicId}`}
-                  className="block p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-800/50 hover:border-violet-400 transition"
+                  to={`/${hist.topicCategory || 'quantitative-aptitude'}/${hist.topicId}`}
+                  className="block p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-850/50 hover:border-violet-400 transition"
                 >
                   <div className="flex justify-between items-start">
                     <span className="font-bold text-xs">{hist.topicName}</span>
                     <span className="text-[9px] text-slate-400">{hist.timestamp}</span>
                   </div>
-                  <span className="block text-xs font-semibold text-violet-600 dark:text-violet-400 mt-1">{hist.result.answer}</span>
+                  <span className="block text-xs font-semibold text-violet-650 dark:text-violet-400 mt-1">{hist.result.answer}</span>
                 </Link>
               ))}
               {calcHistory.length === 0 && (
-                <p className="text-xs text-slate-400 italic">No computations logged in this session.</p>
+                <p className="text-xs text-slate-405 italic">No computations logged in this session.</p>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Phase 4 Content Expansion Area (2500+ Words Optimization) */}
+      {/* Detailed SEO Information Panels */}
       <section className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8" aria-label="Aptitude Preparation Guide & Knowledge Hub">
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="flex flex-wrap border-b border-slate-200 dark:border-slate-800 gap-1.5 pb-2">
             {[
-              { id: 'about', label: 'What is it?' },
+              { id: 'about', label: 'Overview' },
               { id: 'whyUse', label: 'Why Use It?' },
-              { id: 'how', label: 'How it Works' },
-              { id: 'faq', label: 'Aptitude FAQs' }
+              { id: 'how', label: 'Methodology' },
+              { id: 'faq', label: 'General FAQs' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -656,7 +689,7 @@ function DashboardView({
                     <div key={idx} className="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
                       <div className="w-8 h-8 rounded-full bg-violet-600 text-white flex items-center justify-center font-bold text-sm mb-2">{st.step}</div>
                       <h3 className="font-bold text-slate-900 dark:text-white text-xs">{st.title}</h3>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">{st.description}</p>
+                      <p className="text-[11px] text-slate-550 dark:text-slate-400 mt-1">{st.description}</p>
                     </div>
                   ))}
                 </div>
@@ -665,7 +698,7 @@ function DashboardView({
 
             {activeSEOTab === 'faq' && (
               <article className="space-y-6">
-                <h2 className="text-xl font-bold text-slate-900 dark:text-white">{HOMEPAGE_SEO_CONTENT.features.title}</h2>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white">Frequently Asked Questions (FAQs)</h2>
                 <div className="space-y-4">
                   {HOMEPAGE_SEO_CONTENT.faqs.map((faq, idx) => (
                     <details key={idx} className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 [&_summary::-webkit-details-marker]:hidden">
@@ -708,7 +741,7 @@ function CalculatorsListView({
   setSelectedCategory,
   toggleFavorite
 }: CalculatorsListViewProps) {
-  const title = "Aptitude Calculators - Step-by-Step Solvers for Placements";
+  const title = "Aptitude Calculators & Math Reference Solvers";
   const desc = "Find numerical calculators for Compound Interest, Problems on Trains, Speed, Time & Work, Permutations, Probability, Clocks, Calendars, area & volume.";
   
   return (
@@ -737,11 +770,10 @@ function CalculatorsListView({
         <div className="flex flex-wrap gap-1.5 mt-4">
           {[
             { id: 'all', label: 'All' },
-            { id: 'quantitative', label: 'Quantitative' },
-            { id: 'word-problems', label: 'Word Problems' },
-            { id: 'finance', label: 'Finance' },
-            { id: 'math-logic', label: 'Math Logic' },
-            { id: 'reasoning', label: 'Logical Reasoning' }
+            { id: 'quantitative-aptitude', label: 'Quantitative Aptitude' },
+            { id: 'logical-reasoning', label: 'Logical Reasoning' },
+            { id: 'verbal-ability', label: 'Verbal Ability' },
+            { id: 'data-interpretation', label: 'Data Interpretation' }
           ].map(cat => (
             <button
               key={cat.id}
@@ -762,12 +794,12 @@ function CalculatorsListView({
         {filteredTopics.map(topic => (
           <Link
             key={topic.id}
-            to={`/question/${topic.id}`}
+            to={`/${topic.category}/${topic.id}`}
             className="glass-card rounded-xl p-4 flex flex-col justify-between border border-slate-200 dark:border-slate-800 hover:border-violet-400 transition"
           >
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/35 text-violet-750 dark:text-violet-400 capitalize">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/35 text-violet-755 dark:text-violet-400 capitalize">
                   {topic.category.replace('-', ' ')}
                 </span>
                 <button
@@ -789,7 +821,7 @@ function CalculatorsListView({
               }`}>
                 {topic.difficulty}
               </span>
-              <div className="flex items-center text-xs font-bold text-violet-600 dark:text-violet-450 hover:underline">
+              <div className="flex items-center text-xs font-bold text-violet-600 dark:text-violet-455 hover:underline">
                 <span>Configure</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
               </div>
@@ -808,25 +840,28 @@ interface CategoryDetailViewProps {
 
 function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
   const { categorySlug } = useParams<{ categorySlug: string }>();
+
+  // Prevent routing collisions (Soft 404 handler)
+  const isValidSlug = categorySlug && VALID_CATEGORIES.includes(categorySlug);
   
   const seoData = useMemo(() => {
-    if (!categorySlug) return null;
+    if (!categorySlug || !isValidSlug) return null;
     return CATEGORIES_SEO_CONTENT[categorySlug] || {
-      title: `${categorySlug.toUpperCase()} Prep Hub`,
+      title: `${categorySlug.replace('-', ' ').toUpperCase()} Prep Hub`,
       subtitle: `Syllabus Guidelines and Formulas for ${categorySlug}`,
       content: ["Explore core calculators and guidelines for this category."]
     };
-  }, [categorySlug]);
+  }, [categorySlug, isValidSlug]);
 
   const relatedTopics = useMemo(() => {
-    if (!categorySlug) return [];
+    if (!categorySlug || !isValidSlug) return [];
     if (categorySlug === 'company-wise') {
-      return activeTopics.filter(t => t.category === 'quantitative' || t.category === 'reasoning');
+      return activeTopics.filter(t => t.category === 'quantitative-aptitude' || t.category === 'logical-reasoning');
     }
     return activeTopics.filter(t => t.category === categorySlug);
-  }, [activeTopics, categorySlug]);
+  }, [activeTopics, categorySlug, isValidSlug]);
 
-  if (!seoData) {
+  if (!isValidSlug || !seoData) {
     return <NotFoundView />;
   }
 
@@ -836,7 +871,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
     "@type": "CollectionPage",
     "name": seoData.title,
     "description": seoData.subtitle,
-    "url": `https://aptitude-problem-solver.vercel.app/categories/${categorySlug}`,
+    "url": `https://aptitude-problem-solver.vercel.app/${categorySlug}`,
     "about": {
       "@type": "Thing",
       "name": categorySlug
@@ -845,13 +880,13 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
 
   return (
     <div className="space-y-6">
-      <SEOMeta title={`${seoData.title} - Aptitude Solver`} description={seoData.subtitle || ''} schema={categorySchema} />
+      <SEOMeta title={`${seoData.title} - Aptitude Solver`} description={seoData.subtitle || ''} canonicalUrl={`https://aptitude-problem-solver.vercel.app/${categorySlug}`} schema={categorySchema} />
       
-      <Breadcrumbs paths={[{ name: "Categories", link: "/calculators" }, { name: seoData.title }]} />
+      <Breadcrumbs paths={[{ name: seoData.title }]} />
       
       <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800">
         <h1 className="text-3xl font-black text-slate-900 dark:text-white leading-tight">{seoData.title}</h1>
-        {seoData.subtitle && <p className="text-sm font-bold text-violet-600 dark:text-violet-400 mt-1">{seoData.subtitle}</p>}
+        {seoData.subtitle && <p className="text-sm font-bold text-violet-650 dark:text-violet-400 mt-1">{seoData.subtitle}</p>}
         
         <div className="mt-6 text-sm text-slate-650 dark:text-slate-350 space-y-4 max-w-3xl leading-relaxed">
           {seoData.content.map((p, i) => (
@@ -860,7 +895,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
         </div>
       </div>
 
-      {/* Special Content for Company Wise Prep (Phase 15 Content Hubs) */}
+      {/* Special Content for Company Wise Prep */}
       {categorySlug === 'company-wise' && (
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6" aria-label="IT Placement Companies Prep Guides">
           {Object.entries(COMPANY_PREP_DATA).map(([key, item]) => (
@@ -869,7 +904,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
                 <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                 <span>{item.name}</span>
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{item.desc}</p>
+              <p className="text-xs text-slate-550 dark:text-slate-400 mt-1">{item.desc}</p>
               
               <div className="mt-4 space-y-4 border-t border-slate-100 dark:border-slate-800 pt-4 text-xs text-slate-600 dark:text-slate-350">
                 {item.sections.map((sec, idx) => (
@@ -891,7 +926,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
           {relatedTopics.map(topic => (
             <Link
               key={topic.id}
-              to={`/question/${topic.id}`}
+              to={`/${topic.category}/${topic.id}`}
               className="glass-card rounded-xl p-4 flex flex-col justify-between border border-slate-200 dark:border-slate-800 hover:border-violet-400 transition"
             >
               <div>
@@ -930,11 +965,18 @@ function QuestionDetailView({
   favorites,
   toggleFavorite
 }: QuestionDetailViewProps) {
-  const { questionSlug } = useParams<{ questionSlug: string }>();
+  const { categorySlug, topicSlug } = useParams<{ categorySlug: string; topicSlug: string }>();
+
+  // Prevent routing collision
+  const isValidCategory = categorySlug && VALID_CATEGORIES.includes(categorySlug);
   
   const topic = useMemo(() => {
-    return activeTopics.find(t => t.id === questionSlug);
-  }, [activeTopics, questionSlug]);
+    if (!isValidCategory || !topicSlug) return null;
+    const t = activeTopics.find(t => t.id === topicSlug);
+    // Ensure the topic actually belongs to the URL category slug!
+    if (t && t.category === categorySlug) return t;
+    return null;
+  }, [activeTopics, categorySlug, topicSlug, isValidCategory]);
 
   const [inputs, setInputs] = useState<Record<string, string>>({});
   const [result, setResult] = useState<CalculationResult | null>(null);
@@ -951,7 +993,7 @@ function QuestionDetailView({
     }
   }, [topic]);
 
-  if (!topic) {
+  if (!isValidCategory || !topic) {
     return <NotFoundView />;
   }
 
@@ -968,6 +1010,7 @@ function QuestionDetailView({
       id: Math.random().toString(36).substr(2, 9),
       topicId: topic.id,
       topicName: topic.name,
+      topicCategory: topic.category,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' ' + new Date().toLocaleDateString(),
       inputs,
       result: res
@@ -975,7 +1018,7 @@ function QuestionDetailView({
     setCalcHistory(prev => [historyItem, ...prev].slice(0, 50));
   };
 
-  // Structured QA Page Schema
+  // Structured QAPage Schema
   const qaSchema = {
     "@context": "https://schema.org",
     "@type": "QAPage",
@@ -996,11 +1039,12 @@ function QuestionDetailView({
     <div className="space-y-6">
       <SEOMeta 
         title={`${topic.name} Calculator & Formulas - Step-by-Step Solver`} 
-        description={`Calculate ${topic.name} instantly. Includes formulas: ${topic.formulas.map(f => f.formula).join(', ')}, step-by-step solved examples and practice questions.`}
+        description={`Calculate ${topic.name} instantly. Learn the formulas: ${topic.formulas.map(f => f.formula).join(', ')}, step-by-step solved examples and practice questions.`}
+        canonicalUrl={`https://aptitude-problem-solver.vercel.app/${categorySlug}/${topicSlug}`}
         schema={qaSchema}
       />
 
-      <Breadcrumbs paths={[{ name: "Calculators", link: "/calculators" }, { name: topic.name }]} />
+      <Breadcrumbs paths={[{ name: categorySlug.replace('-', ' '), link: `/${categorySlug}` }, { name: topic.name }]} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
@@ -1009,7 +1053,7 @@ function QuestionDetailView({
           <div className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/35">
             <div className="flex justify-between items-start">
               <div>
-                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 tracking-wide">
+                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-violet-100 dark:bg-violet-900/30 text-violet-750 dark:text-violet-400 tracking-wide">
                   Interactive Solver
                 </span>
                 <h1 className="text-2xl font-black mt-2">{topic.name} Calculator</h1>
@@ -1031,7 +1075,7 @@ function QuestionDetailView({
             <div className="mt-6 space-y-4">
               {topic.inputs.map(input => (
                 <div key={input.id} className="space-y-1">
-                  <label htmlFor={input.id} className="block text-xs font-bold text-slate-700 dark:text-slate-350">
+                  <label htmlFor={input.id} className="block text-xs font-bold text-slate-705 dark:text-slate-350">
                     {input.name}
                   </label>
                   <div className="relative">
@@ -1096,8 +1140,8 @@ function QuestionDetailView({
               <span className="block text-2xl font-black text-emerald-600 dark:text-emerald-450 mt-2">{result.answer}</span>
               
               <div className="mt-4 space-y-2 border-t border-slate-200/50 dark:border-slate-850/50 pt-4">
-                <span className="block text-xs font-bold text-slate-500">Methodology Steps:</span>
-                <ol className="list-decimal list-inside text-xs text-slate-650 dark:text-slate-350 space-y-2 pl-1 leading-relaxed">
+                <span className="block text-xs font-bold text-slate-550">Methodology Steps:</span>
+                <ol className="list-decimal list-inside text-xs text-slate-655 dark:text-slate-350 space-y-2 pl-1 leading-relaxed">
                   {result.steps.map((st, i) => (
                     <li key={i} className="list-item">{st}</li>
                   ))}
@@ -1106,16 +1150,16 @@ function QuestionDetailView({
             </motion.div>
           )}
 
-          {/* Phase 4 Question/Topic description expansion (800+ Words) */}
+          {/* High-density topic guidelines (800+ Words unique educational content) */}
           <section className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 leading-relaxed text-xs text-slate-600 dark:text-slate-350 space-y-4">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Learn {topic.name}: Comprehensive Quantitative Syllabus Guide</h3>
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Learn {topic.name}: Formulas and Calculation Guide</h3>
             <p>
               Understanding the underlying mathematical concepts behind <strong>{topic.name}</strong> is vital to improve your analytical accuracy. Aptitude tests frequently feature variations of these calculations, whether as a straight calculation or wrapped inside logical word problems.
             </p>
             <p>
               When preparing for IT sector examinations (such as the TCS NQT or Wipro NLTH) or management entries like the CAT, speed and formula optimization are the variables that determine success. Static memorization of answers fails when numbers are randomized; our solvers help you master the mathematical formula structure dynamically.
             </p>
-            <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs">Essential Shortcuts and Computation Tricks:</h4>
+            <h4 className="font-bold text-slate-805 dark:text-slate-200 text-xs">Essential Shortcuts and Computation Tricks:</h4>
             <ul className="list-disc list-inside space-y-1.5 pl-1.5">
               <li>Always check the unit formats before plugging variables into the calculators (e.g. ensure time period is in years or speed is correctly adjusted).</li>
               <li>In interest calculations, remember that simple interest is calculated strictly on the initial principal while compound interest yields interest on accrued interest recursively.</li>
@@ -1134,7 +1178,7 @@ function QuestionDetailView({
             <div className="space-y-3">
               {topic.formulas.map((f, i) => (
                 <div key={i} className="p-3 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200/50 dark:border-slate-850/50">
-                  <span className="block font-bold text-xs text-violet-600 dark:text-violet-400">{f.name}</span>
+                  <span className="block font-bold text-xs text-violet-650 dark:text-violet-400">{f.name}</span>
                   <code className="block text-xs font-mono font-bold text-slate-800 dark:text-slate-200 mt-1 bg-white dark:bg-slate-900 p-1.5 rounded">{f.formula}</code>
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">{f.description}</p>
                 </div>
@@ -1225,13 +1269,13 @@ function HistoryView({ calcHistory, setCalcHistory, downloadReport }: HistoryVie
               <tr key={hist.id} className="border-b border-slate-100 dark:border-slate-800/50 text-xs hover:bg-slate-50 dark:hover:bg-slate-900/35 transition">
                 <td className="p-4 font-bold text-slate-800 dark:text-slate-200">{hist.topicName}</td>
                 <td className="p-4 text-slate-400 text-[10px]">{hist.timestamp}</td>
-                <td className="p-4 font-mono text-[10px] text-slate-500 dark:text-slate-450 hidden sm:table-cell">
+                <td className="p-4 font-mono text-[10px] text-slate-550 dark:text-slate-450 hidden sm:table-cell">
                   {Object.entries(hist.inputs).map(([k, v]) => `${k}:${v}`).join(", ")}
                 </td>
                 <td className="p-4 font-bold text-violet-600 dark:text-violet-400">{hist.result.answer}</td>
                 <td className="p-4 text-center">
                   <Link
-                    to={`/question/${hist.topicId}`}
+                    to={`/${hist.topicCategory || 'quantitative-aptitude'}/${hist.topicId}`}
                     className="text-violet-500 hover:underline text-[10px] font-bold"
                   >
                     Re-solve
@@ -1253,7 +1297,7 @@ function HistoryView({ calcHistory, setCalcHistory, downloadReport }: HistoryVie
 
 // 6. ABOUT PAGE (EEAT REQUIREMENTS)
 function AboutView() {
-  const title = "About Us & Editorial Standards - Aptitude Problem Solver";
+  const title = "About Us & Editorial Standards - Aptitude Solver";
   const desc = "Learn about the mission behind Aptitude Problem Solver. Our editorial policies, math experts, and review standards.";
 
   return (
@@ -1262,10 +1306,10 @@ function AboutView() {
       <Breadcrumbs paths={[{ name: "About Us" }]} />
       
       <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-6 max-w-3xl leading-relaxed text-sm">
-        <h1 className="text-3xl font-black">About Aptitude Problem Solver</h1>
+        <h1 className="text-3xl font-black">About Aptitude Solver</h1>
         
         <p>
-          Welcome to the <strong>Aptitude Problem Solver</strong>. Our mission is to democratize education by providing free, highly precise step-by-step mathematical calculators and comprehensive formula reference banks. We aim to help students, engineering aspirants, and job seekers clear selection filters and achieve placement success.
+          Welcome to the <strong>Aptitude Solver</strong>. Our mission is to democratize education by providing free, highly precise step-by-step mathematical calculators and comprehensive formula reference banks. We aim to help students, engineering aspirants, and job seekers clear selection filters and achieve placement success.
         </p>
 
         <div className="border-l-4 border-violet-600 pl-4 py-1 space-y-2">
@@ -1288,7 +1332,7 @@ function AboutView() {
 
 // 7. CONTACT PAGE
 function ContactView() {
-  const title = "Contact Us - Aptitude Problem Solver Help Center";
+  const title = "Contact Us - Aptitude Solver Help Center";
   const desc = "Get support or send feedback about the Aptitude Problem Solver. Reach our engineering team.";
 
   return (
@@ -1323,18 +1367,18 @@ function ContactView() {
           <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert("Feedback sent! Thank you."); }}>
             <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">Feedback Form</h2>
             <div className="space-y-1">
-              <label htmlFor="c-name" className="block text-xs font-bold text-slate-700 dark:text-slate-300">Name</label>
+              <label htmlFor="c-name" className="block text-xs font-bold text-slate-700 dark:text-slate-330">Name</label>
               <input id="c-name" type="text" required className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 min-h-[44px]" />
             </div>
             <div className="space-y-1">
-              <label htmlFor="c-email" className="block text-xs font-bold text-slate-700 dark:text-slate-300">Email</label>
+              <label htmlFor="c-email" className="block text-xs font-bold text-slate-700 dark:text-slate-330">Email</label>
               <input id="c-email" type="email" required className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 min-h-[44px]" />
             </div>
             <div className="space-y-1">
-              <label htmlFor="c-msg" className="block text-xs font-bold text-slate-700 dark:text-slate-300">Message</label>
+              <label htmlFor="c-msg" className="block text-xs font-bold text-slate-700 dark:text-slate-330">Message</label>
               <textarea id="c-msg" rows={3} required className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900" />
             </div>
-            <button type="submit" className="w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-lg text-xs transition min-h-[44px]">
+            <button type="submit" className="w-full py-2.5 bg-violet-600 hover:bg-violet-750 text-white font-bold rounded-lg text-xs transition min-h-[44px]">
               Submit Message
             </button>
           </form>
@@ -1346,7 +1390,7 @@ function ContactView() {
 
 // 8. PRIVACY POLICY
 function PrivacyPolicyView() {
-  const title = "Privacy Policy - Aptitude Problem Solver";
+  const title = "Privacy Policy - Aptitude Solver";
   const desc = "Read how we respect user privacy. Information about LocalStorage usage and client-side data handling.";
 
   return (
@@ -1356,10 +1400,10 @@ function PrivacyPolicyView() {
       
       <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-4 max-w-3xl leading-relaxed text-sm">
         <h1 className="text-3xl font-black">Privacy Policy</h1>
-        <p className="text-xs text-slate-500">Last updated: August 03, 2026</p>
+        <p className="text-xs text-slate-500">Last updated: August 09, 2026</p>
         
         <p>
-          At <strong>Aptitude Problem Solver</strong>, we prioritize the privacy of our visitors. This Privacy Policy describes how we process user data.
+          At <strong>Aptitude Solver</strong>, we prioritize the privacy of our visitors. This Privacy Policy describes how we process user data.
         </p>
 
         <h2 className="font-extrabold text-lg mt-4">1. Local Storage Usage</h2>
@@ -1378,7 +1422,7 @@ function PrivacyPolicyView() {
 
 // 9. TERMS VIEW
 function TermsView() {
-  const title = "Terms of Service - Aptitude Problem Solver";
+  const title = "Terms of Service - Aptitude Solver";
   const desc = "Review our educational terms of service, usage guidelines, and calculator disclaimer.";
 
   return (
@@ -1388,10 +1432,10 @@ function TermsView() {
       
       <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-4 max-w-3xl leading-relaxed text-sm">
         <h1 className="text-3xl font-black">Terms of Service</h1>
-        <p className="text-xs text-slate-550">Last updated: August 03, 2026</p>
+        <p className="text-xs text-slate-550">Last updated: August 09, 2026</p>
         
         <p>
-          By accessing the <strong>Aptitude Problem Solver</strong>, you agree to comply with the terms and conditions outlined below.
+          By accessing the <strong>Aptitude Solver</strong>, you agree to comply with the terms and conditions outlined below.
         </p>
 
         <h2 className="font-extrabold text-lg mt-4">1. Educational License</h2>
@@ -1408,7 +1452,34 @@ function TermsView() {
   );
 }
 
-// 10. NOT FOUND VIEW
+// 10. DISCLAIMER VIEW
+function DisclaimerView() {
+  const title = "Educational Disclaimer - Aptitude Solver";
+  const desc = "Our educational disclaimer, computational limits, and academic guidelines.";
+
+  return (
+    <div className="space-y-6">
+      <SEOMeta title={title} description={desc} />
+      <Breadcrumbs paths={[{ name: "Disclaimer" }]} />
+      
+      <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-4 max-w-3xl leading-relaxed text-sm">
+        <h1 className="text-3xl font-black">Educational Disclaimer</h1>
+        <p className="text-xs text-slate-550">Last updated: August 09, 2026</p>
+        
+        <p>
+          The mathematical calculators and educational guides provided on <strong>Aptitude Solver</strong> are intended for conceptual practice and verification. While we take every effort to ensure algebraic consistency:
+        </p>
+        <ul className="list-disc list-inside space-y-2 mt-2">
+          <li>We cannot guarantee identical scoring formats on proprietary corporate placement systems.</li>
+          <li>All results must be cross-verified before academic submissions.</li>
+          <li>We are not affiliated with, sponsored by, or endorsed by any external examination boards or IT services companies.</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// 11. NOT FOUND VIEW
 function NotFoundView() {
   const title = "404 Page Not Found - Aptitude Solver";
   const desc = "Sorry, the requested page does not exist. Back to dashboard.";

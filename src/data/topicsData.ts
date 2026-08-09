@@ -24,7 +24,7 @@ export interface SolvedExample {
 export interface Topic {
   id: string;
   name: string;
-  category: 'quantitative' | 'word-problems' | 'math-logic' | 'finance' | 'reasoning';
+  category: 'quantitative-aptitude' | 'logical-reasoning' | 'verbal-ability' | 'data-interpretation';
   description: string;
   formulas: Formula[];
   inputs: InputField[];
@@ -36,7 +36,7 @@ export const topicsData: Topic[] = [
   {
     id: "simple-interest",
     name: "Simple Interest",
-    category: "finance",
+    category: "quantitative-aptitude",
     description: "Calculate interest on principal amount where the interest accumulated is always based on the initial principal.",
     difficulty: "Easy",
     formulas: [
@@ -74,7 +74,7 @@ export const topicsData: Topic[] = [
   {
     id: "compound-interest",
     name: "Compound Interest",
-    category: "finance",
+    category: "quantitative-aptitude",
     description: "Calculate interest where the interest earned each period is added to the principal, so that interest also earns interest.",
     difficulty: "Medium",
     formulas: [
@@ -113,7 +113,7 @@ export const topicsData: Topic[] = [
   {
     id: "problems-on-trains",
     name: "Problems on Trains",
-    category: "word-problems",
+    category: "quantitative-aptitude",
     description: "Calculate speed, length, crossing times of trains passing bridges, platforms, poles, or other moving trains.",
     difficulty: "Medium",
     formulas: [
@@ -161,7 +161,7 @@ export const topicsData: Topic[] = [
   {
     id: "time-and-distance",
     name: "Time and Distance",
-    category: "word-problems",
+    category: "quantitative-aptitude",
     description: "Calculate values relating to speed, distance covered, average speed, and conversion rates.",
     difficulty: "Easy",
     formulas: [
@@ -196,7 +196,7 @@ export const topicsData: Topic[] = [
   {
     id: "time-and-work",
     name: "Time and Work",
-    category: "word-problems",
+    category: "quantitative-aptitude",
     description: "Determine individual efficiencies, combined rates, and days required to complete a task.",
     difficulty: "Medium",
     formulas: [
@@ -232,7 +232,7 @@ export const topicsData: Topic[] = [
   {
     id: "profit-and-loss",
     name: "Profit and Loss",
-    category: "finance",
+    category: "quantitative-aptitude",
     description: "Determine Cost Price (CP), Selling Price (SP), Profit or Loss percentage, and discounts.",
     difficulty: "Easy",
     formulas: [
@@ -273,7 +273,7 @@ export const topicsData: Topic[] = [
   {
     id: "percentage",
     name: "Percentage",
-    category: "quantitative",
+    category: "quantitative-aptitude",
     description: "Basic percentage conversions, percentage increase/decrease, and calculations.",
     difficulty: "Easy",
     formulas: [
@@ -308,7 +308,7 @@ export const topicsData: Topic[] = [
   {
     id: "problems-on-ages",
     name: "Problems on Ages",
-    category: "word-problems",
+    category: "quantitative-aptitude",
     description: "Compute current, past, and future ages of multiple people based on ratio and linear equations.",
     difficulty: "Easy",
     formulas: [
@@ -344,7 +344,7 @@ export const topicsData: Topic[] = [
   {
     id: "calendar",
     name: "Calendar",
-    category: "reasoning",
+    category: "logical-reasoning",
     description: "Determine the day of the week for any given date and calculate odd days.",
     difficulty: "Medium",
     formulas: [
@@ -380,7 +380,7 @@ export const topicsData: Topic[] = [
   {
     id: "clock",
     name: "Clock",
-    category: "reasoning",
+    category: "logical-reasoning",
     description: "Compute the angle between hour and minute hands, or calculate time gains/losses.",
     difficulty: "Medium",
     formulas: [
@@ -410,7 +410,7 @@ export const topicsData: Topic[] = [
   {
     id: "average",
     name: "Average",
-    category: "quantitative",
+    category: "quantitative-aptitude",
     description: "Calculate arithmetic mean, weighted average, and values of elements within groups.",
     difficulty: "Easy",
     formulas: [
@@ -439,7 +439,7 @@ export const topicsData: Topic[] = [
   {
     id: "partnership",
     name: "Partnership",
-    category: "finance",
+    category: "quantitative-aptitude",
     description: "Determine profit-sharing distribution based on investment amounts and time periods.",
     difficulty: "Easy",
     formulas: [
@@ -474,7 +474,7 @@ export const topicsData: Topic[] = [
   {
     id: "boats-and-streams",
     name: "Boats and Streams",
-    category: "word-problems",
+    category: "quantitative-aptitude",
     description: "Solve problems regarding upstream speed, downstream speed, speed of boat in still water, and speed of the stream.",
     difficulty: "Medium",
     formulas: [
@@ -519,7 +519,7 @@ export const topicsData: Topic[] = [
   {
     id: "ratio-and-proportion",
     name: "Ratio and Proportion",
-    category: "quantitative",
+    category: "quantitative-aptitude",
     description: "Solve ratios, fourth proportions, mean proportions, and distribute values between ratios.",
     difficulty: "Easy",
     formulas: [
@@ -554,7 +554,7 @@ export const topicsData: Topic[] = [
   {
     id: "probability",
     name: "Probability",
-    category: "math-logic",
+    category: "logical-reasoning",
     description: "Calculate odds, sample space, event counts, card selections, dice throws, and coin flips.",
     difficulty: "Medium",
     formulas: [
@@ -584,7 +584,7 @@ export const topicsData: Topic[] = [
   {
     id: "permutations-and-combinations",
     name: "Permutation and Combination",
-    category: "math-logic",
+    category: "logical-reasoning",
     description: "Determine arrangements (nPr) and selections (nCr) of elements.",
     difficulty: "Medium",
     formulas: [
@@ -618,7 +618,7 @@ export const topicsData: Topic[] = [
   {
     id: "area",
     name: "Area",
-    category: "quantitative",
+    category: "quantitative-aptitude",
     description: "Calculate areas and perimeters of geometric shapes like squares, rectangles, triangles, and circles.",
     difficulty: "Easy",
     formulas: [
@@ -646,7 +646,7 @@ export const topicsData: Topic[] = [
   {
     id: "volume-and-surface-area",
     name: "Volume and Surface Area",
-    category: "quantitative",
+    category: "quantitative-aptitude",
     description: "Determine volumes and surface areas of cylinders, spheres, cones, and cuboids.",
     difficulty: "Medium",
     formulas: [
@@ -675,7 +675,7 @@ export const topicsData: Topic[] = [
   {
     id: "logarithms",
     name: "Logarithms",
-    category: "math-logic",
+    category: "logical-reasoning",
     description: "Properties of logs, base changing calculations, and product rules.",
     difficulty: "Medium",
     formulas: [
@@ -702,7 +702,7 @@ export const topicsData: Topic[] = [
   {
     id: "hcf-and-lcm",
     name: "HCF and LCM",
-    category: "quantitative",
+    category: "quantitative-aptitude",
     description: "Find the Highest Common Factor (HCF) and Least Common Multiple (LCM) of numbers.",
     difficulty: "Easy",
     formulas: [
@@ -731,7 +731,7 @@ export const topicsData: Topic[] = [
   {
     id: "surds-and-indices",
     name: "Surds and Indices",
-    category: "quantitative",
+    category: "quantitative-aptitude",
     description: "Simplify expressions containing indices, exponents, roots, and surds.",
     difficulty: "Easy",
     formulas: [
@@ -759,7 +759,7 @@ export const topicsData: Topic[] = [
   {
     id: "pipes-and-cisterns",
     name: "Pipes and Cisterns",
-    category: "word-problems",
+    category: "quantitative-aptitude",
     description: "Calculate fill times, empty times, and combined flow rates of cistern inlets and outlets.",
     difficulty: "Medium",
     formulas: [
@@ -779,6 +779,157 @@ export const topicsData: Topic[] = [
           "Time taken = 24/7 ≈ 3.43 hours."
         ],
         answer: "Time = 3.43 hours"
+      }
+    ]
+  },
+  {
+    id: "grammar",
+    name: "Grammar & Error Spotting",
+    category: "verbal-ability",
+    description: "Learn subject-verb agreement, modifiers, tenses, and correct grammatical structures.",
+    difficulty: "Easy",
+    formulas: [
+      { name: "Subject-Verb Agreement", formula: "Singular Subject + Singular Verb, Plural Subject + Plural Verb", description: "Verbs must agree with their subjects in number." }
+    ],
+    inputs: [
+      { id: "ruleType", name: "Grammar Concept", placeholder: "", type: "select", defaultValue: "Subject-Verb Agreement", options: ["Subject-Verb Agreement", "Modifiers", "Tenses"] }
+    ],
+    examples: [
+      {
+        question: "Identify the error: 'Every one of the students have completed the test.'",
+        inputs: { ruleType: "Subject-Verb Agreement" },
+        steps: [
+          "Identify the subject: 'Every one' is a singular indefinite pronoun.",
+          "Identify the verb: 'have completed' is plural.",
+          "Correction: Change 'have' to 'has' to match the singular subject."
+        ],
+        answer: "Error is 'have', correct verb is 'has'."
+      }
+    ]
+  },
+  {
+    id: "synonyms-antonyms",
+    name: "Synonyms and Antonyms",
+    category: "verbal-ability",
+    description: "Build vocabulary by learning words with similar and opposite meanings.",
+    difficulty: "Easy",
+    formulas: [
+      { name: "Context Clues", formula: "Read surrounding text to infer word meanings", description: "Use semantic clues from neighboring sentences to verify definitions." }
+    ],
+    inputs: [
+      { id: "wordSelect", name: "Select Word to Analyze", placeholder: "", type: "select", defaultValue: "diligent", options: ["diligent", "abundant", "ephemeral"] }
+    ],
+    examples: [
+      {
+        question: "Find a synonym and antonym for the word 'diligent'.",
+        inputs: { wordSelect: "diligent" },
+        steps: [
+          "Definition of diligent: Showing care and effort in work or duties.",
+          "Synonym: Hardworking, industrious, assiduous.",
+          "Antonym: Lazy, idle, negligent."
+        ],
+        answer: "Synonym = Hardworking, Antonym = Lazy"
+      }
+    ]
+  },
+  {
+    id: "reading-comprehension",
+    name: "Reading Comprehension",
+    category: "verbal-ability",
+    description: "Master passage analysis, tone detection, and reading efficiency.",
+    difficulty: "Medium",
+    formulas: [
+      { name: "Skimming Rule", formula: "Read first and last paragraphs for central themes", description: "Quickly locate central themes before detailing specific questions." }
+    ],
+    inputs: [
+      { id: "passageSelect", name: "Select Reading Passage", placeholder: "", type: "select", defaultValue: "Technology in Education", options: ["Technology in Education", "Economic Inflation"] }
+    ],
+    examples: [
+      {
+        question: "What is the primary objective of reading comprehension sections?",
+        inputs: { passageSelect: "Technology in Education" },
+        steps: [
+          "Evaluate reading rate and retention.",
+          "Synthesize key themes from multiple paragraphs.",
+          "Deduct authors' perspective and tone."
+        ],
+        answer: "To test conceptual extraction and context reasoning."
+      }
+    ]
+  },
+  {
+    id: "tables",
+    name: "Data Tables Analysis",
+    category: "data-interpretation",
+    description: "Solve statistical questions using row and column grid data structures.",
+    difficulty: "Medium",
+    formulas: [
+      { name: "Growth Rate", formula: "Growth = ((New Value - Old Value) / Old Value) × 100", description: "Percentage growth calculation between periods." }
+    ],
+    inputs: [
+      { id: "yearOne", name: "Year 1 Sales", placeholder: "e.g. 500", type: "number", defaultValue: "500", unit: "Lakhs" },
+      { id: "yearTwo", name: "Year 2 Sales", placeholder: "e.g. 650", type: "number", defaultValue: "650", unit: "Lakhs" }
+    ],
+    examples: [
+      {
+        question: "Sales grew from 500 Lakhs to 650 Lakhs. Find the percentage growth.",
+        inputs: { yearOne: 500, yearTwo: 650 },
+        steps: [
+          "Identify parameters: Old = 500, New = 650.",
+          "Growth = (650 - 500) / 500 = 150 / 500 = 0.30.",
+          "Percentage Growth = 0.30 * 100 = 30%."
+        ],
+        answer: "Growth = 30%"
+      }
+    ]
+  },
+  {
+    id: "bar-graphs",
+    name: "Bar Charts & Histograms",
+    category: "data-interpretation",
+    description: "Compare data values visually across discrete categories.",
+    difficulty: "Easy",
+    formulas: [
+      { name: "Average Value", formula: "Average = Sum of elements / Number of elements", description: "Calculate average across categories." }
+    ],
+    inputs: [
+      { id: "valA", name: "Category A Value", placeholder: "e.g. 80", type: "number", defaultValue: "80" },
+      { id: "valB", name: "Category B Value", placeholder: "e.g. 120", type: "number", defaultValue: "120" }
+    ],
+    examples: [
+      {
+        question: "Calculate the average value of Category A (80) and Category B (120).",
+        inputs: { valA: 80, valB: 120 },
+        steps: [
+          "Sum = 80 + 120 = 200.",
+          "Count = 2.",
+          "Average = 200 / 2 = 100."
+        ],
+        answer: "Average = 100"
+      }
+    ]
+  },
+  {
+    id: "pie-charts",
+    name: "Pie Charts & Degrees",
+    category: "data-interpretation",
+    description: "Analyze share percentages and convert portions to angular degrees.",
+    difficulty: "Medium",
+    formulas: [
+      { name: "Degree Conversion", formula: "Degrees = (Percentage / 100) × 360", description: "Convert share portion to degrees." }
+    ],
+    inputs: [
+      { id: "sharePct", name: "Category Share Percentage", placeholder: "e.g. 25", type: "number", defaultValue: "25", unit: "%" }
+    ],
+    examples: [
+      {
+        question: "Convert 25% share of a pie chart into degrees.",
+        inputs: { sharePct: 25 },
+        steps: [
+          "Use conversion: Degrees = (25 / 100) * 360",
+          "Degrees = 0.25 * 360 = 90 degrees."
+        ],
+        answer: "Degrees = 90°"
       }
     ]
   }
