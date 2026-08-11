@@ -6,6 +6,7 @@ export interface SEOMetaProps {
   canonicalUrl?: string;
   ogType?: 'website' | 'article';
   schema?: Record<string, any> | Record<string, any>[];
+  noindex?: boolean;
 }
 
 export default function SEOMeta({
@@ -13,9 +14,25 @@ export default function SEOMeta({
   description,
   canonicalUrl = "https://aptitude-problem-solver.vercel.app/",
   ogType = "website",
-  schema
+  schema,
+  noindex = false
 }: SEOMetaProps) {
   useEffect(() => {
+    // Update Robots Meta for noindex support
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (noindex) {
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.setAttribute('content', 'noindex, nofollow');
+    } else {
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'index, follow');
+      }
+    }
+
     // Update Document Title
     document.title = title;
 
@@ -119,7 +136,7 @@ export default function SEOMeta({
         currentScript.textContent = '{}';
       }
     };
-  }, [title, description, canonicalUrl, ogType, schema]);
+  }, [title, description, canonicalUrl, ogType, schema, noindex]);
 
   return null;
 }

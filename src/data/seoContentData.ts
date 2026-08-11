@@ -100,22 +100,49 @@ export const HOMEPAGE_SEO_CONTENT = {
 };
 
 export const CATEGORIES_SEO_CONTENT: Record<string, SEOBlock> = {
-  "quantitative-aptitude": {
-    title: "Quantitative Aptitude Preparation Guide",
-    subtitle: "Master Math Shortcuts, Solved Examples, and Core Concepts",
+  "finance": {
+    title: "Finance Aptitude Questions & Problems | Aptitude Solver",
+    subtitle: "Understand Interest, Profit, Loss, Discount, and Investment Math",
     content: [
-      "Quantitative Aptitude is the cornerstone of every competitive exam and campus recruitment drive. It encompasses mathematical fields including Arithmetic (Percentages, Profit & Loss, Simple & Compound Interest, Ratio & Proportion, Averages), Algebra, Geometry, Mensuration, and modern mathematics (Probability, Permutations & Combinations).",
-      "To clear the cutoff of competitive exams like CAT, GMAT, GRE, or banking tests, pure accuracy is not enough—speed is critical. Standard textbook methods often involve long calculations that consume valuable minutes. Our Quantitative Aptitude module focuses on teaching you the underlying shortcuts and mental arithmetic tricks.",
-      "For example, calculating compound interest compounded semi-annually or quarterly can quickly become tedious. Our platform shows you how to use effective interest rate percentage formulas to convert compound interest problems into simple multiplications. Explore our topic-specific guides to master these formulas, view detailed solved examples, and utilize interactive solvers to check your progress."
+      "Financial aptitude is highly valued in banking recruitment (IBPS, SBI PO, RBI Grade B) and corporate consulting roles. It requires a firm grip on Simple Interest, Compound Interest, Profit & Loss, Partnerships, and Stock valuations.",
+      "Understanding compound interest (CI) is critical as it deals with the concept of 'interest on interest.' In business scenarios, you must also be familiar with marked prices and successive discounts. A common error is simply adding successive discount percentages (e.g. thinking 20% and 10% successive discounts equal a single 30% discount, whereas the actual effective discount is 28%).",
+      "Our business calculators and explanations break down compound interest compounding frequencies (annually, semi-annually, quarterly, and monthly) and successive discounts. Review the step-by-step guides to gain deep business arithmetic insights."
     ]
   },
-  "logical-reasoning": {
-    title: "Logical Reasoning & Placement Preparation",
-    subtitle: "Crack Puzzles, Seating Arrangements, Blood Relations, and Syllogisms",
+  "word-problems": {
+    title: "Aptitude Word Problems & Practice Questions | Aptitude Solver",
+    subtitle: "Decipher Complex Text Scenarios and Formulate Equations",
     content: [
-      "Logical Reasoning tests non-verbal logic, spatial thinking, and relational analysis. It is highly prominent in IT company screening tests (TCS NQT, Wipro, Infosys) and management tests.",
-      "Key topics include blood relations (constructing family trees), seating arrangements (circular and linear tracking), syllogisms (Venn diagram deductions), and direction sense tests. The secret to cracking logical reasoning is systematic grid charting or diagramming.",
-      "Our reasoning prep module walks you through structuring family relations, representing circular seating setups, and establishing logical Venn diagrams. Study our solved examples to secure high scores in reasoning sections."
+      "Word problems are mathematical questions presented as a narrative rather than a simple equation. These include popular aptitude topics like Time, Speed & Distance, Problems on Trains, Boats & Streams, Pipes & Cisterns, and Time & Work.",
+      "The main challenge in word problems is translating the English text into a mathematical model. Candidates often fail to correctly assign variables or identify relative quantities (such as relative speed or combined work rates). Our interactive calculators resolve this by prompting you for the exact inputs required.",
+      "Our Time and Work module teaches the Unitary Method and the LCM Method. While the unitary method represents work as a fraction, the LCM method converts work into 'total units of work,' making calculation much faster and less prone to fractional mistakes. Learn these strategies and apply them directly to solve placement questions."
+    ]
+  },
+  "logical": {
+    title: "Logical Reasoning Questions & Practice | Aptitude Solver",
+    subtitle: "Develop Analytical Thinking and Solve Venn Diagrams",
+    content: [
+      "Logical reasoning tests evaluate a candidate's ability to analyze patterns, structures, and relationships under pressure. Unlike rote memorization, logical ability is about structured problem solving, utilizing Venn diagrams, grid mapping, or tree diagrams to solve complex verbal and non-verbal logic problems.",
+      "In corporate selection tests and competitive exams (like CAT, GRE, GMAT, and banking recruitment), logical reasoning consists of data arrangement, blood relations, syllogisms, and coding-decoding puzzles. By translating abstract rules into concrete matrices, you can systematically arrive at correct deductions.",
+      "Explore our logical reasoning guide, practice with mock examples, and use our interactive calculators to verify your answers step-by-step. Improve your logical deductions and learn key shortcut tricks to save time."
+    ]
+  },
+  "math-logic": {
+    title: "Math Logic Questions & Practice Problems | Aptitude Solver",
+    subtitle: "Master Number Systems, Divisibility Rules, and Logarithms",
+    content: [
+      "Math logic refers to the intersection of mathematical operations and logical deduction. It includes topics like number systems, HCF & LCM, divisibility tests, series completion, logical grids, and clock/calendar problems.",
+      "Developing a high quantitative logic ability allows you to detect patterns quickly. In placement tests, series completion and coding-decoding questions test this exact skill. Success depends on recognizing square, cube, prime number, or arithmetic progression intervals.",
+      "Our guides explain the mathematical theorems governing prime numbers, divisibility tests, and series patterns. Train your brain with our analytical concepts to solve puzzles efficiently."
+    ]
+  },
+  "reasoning": {
+    title: "Reasoning Questions & Practice Tests | Aptitude Solver",
+    subtitle: "Crack Puzzles, Seating Arrangements, Blood Relations, and Clocks/Calendars",
+    content: [
+      "Reasoning aptitude sections evaluate your spatial layout tracking, sequence completion, and chronological arithmetic skills. This category features the popular clocks and calendars problem sets, seating arrangements, and logical coding puzzles.",
+      "For instance, calendar problems require finding the day of the week on a specific historical date. This is solved using the 'odd days' concept where days exceeding full weeks are tracked recursively. Clock problems require calculating angles between hour and minute hands, which move at 0.5 degrees per minute and 6 degrees per minute respectively.",
+      "Our reasoning prep module walks you through structuring seating setups, calculating hand degrees, and establishing leap year rules. Study our worked examples and verify computations instantly using our interactive calculators."
     ]
   },
   "verbal-ability": {

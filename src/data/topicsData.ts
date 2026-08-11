@@ -24,7 +24,7 @@ export interface SolvedExample {
 export interface Topic {
   id: string;
   name: string;
-  category: 'quantitative-aptitude' | 'logical-reasoning' | 'verbal-ability' | 'data-interpretation';
+  category: 'finance' | 'word-problems' | 'logical' | 'math-logic' | 'reasoning' | 'company-wise' | 'verbal-ability' | 'data-interpretation';
   description: string;
   formulas: Formula[];
   inputs: InputField[];
@@ -36,7 +36,7 @@ export const topicsData: Topic[] = [
   {
     id: "simple-interest",
     name: "Simple Interest",
-    category: "quantitative-aptitude",
+    category: "finance",
     description: "Calculate interest on principal amount where the interest accumulated is always based on the initial principal.",
     difficulty: "Easy",
     formulas: [
@@ -74,7 +74,7 @@ export const topicsData: Topic[] = [
   {
     id: "compound-interest",
     name: "Compound Interest",
-    category: "quantitative-aptitude",
+    category: "finance",
     description: "Calculate interest where the interest earned each period is added to the principal, so that interest also earns interest.",
     difficulty: "Medium",
     formulas: [
@@ -113,7 +113,7 @@ export const topicsData: Topic[] = [
   {
     id: "problems-on-trains",
     name: "Problems on Trains",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Calculate speed, length, crossing times of trains passing bridges, platforms, poles, or other moving trains.",
     difficulty: "Medium",
     formulas: [
@@ -161,7 +161,7 @@ export const topicsData: Topic[] = [
   {
     id: "time-and-distance",
     name: "Time and Distance",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Calculate values relating to speed, distance covered, average speed, and conversion rates.",
     difficulty: "Easy",
     formulas: [
@@ -196,7 +196,7 @@ export const topicsData: Topic[] = [
   {
     id: "time-and-work",
     name: "Time and Work",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Determine individual efficiencies, combined rates, and days required to complete a task.",
     difficulty: "Medium",
     formulas: [
@@ -232,7 +232,7 @@ export const topicsData: Topic[] = [
   {
     id: "profit-and-loss",
     name: "Profit and Loss",
-    category: "quantitative-aptitude",
+    category: "finance",
     description: "Determine Cost Price (CP), Selling Price (SP), Profit or Loss percentage, and discounts.",
     difficulty: "Easy",
     formulas: [
@@ -273,7 +273,7 @@ export const topicsData: Topic[] = [
   {
     id: "percentage",
     name: "Percentage",
-    category: "quantitative-aptitude",
+    category: "finance",
     description: "Basic percentage conversions, percentage increase/decrease, and calculations.",
     difficulty: "Easy",
     formulas: [
@@ -308,7 +308,7 @@ export const topicsData: Topic[] = [
   {
     id: "problems-on-ages",
     name: "Problems on Ages",
-    category: "quantitative-aptitude",
+    category: "finance",
     description: "Compute current, past, and future ages of multiple people based on ratio and linear equations.",
     difficulty: "Easy",
     formulas: [
@@ -342,9 +342,9 @@ export const topicsData: Topic[] = [
     ]
   },
   {
-    id: "calendar",
+    id: "calendars",
     name: "Calendar",
-    category: "logical-reasoning",
+    category: "reasoning",
     description: "Determine the day of the week for any given date and calculate odd days.",
     difficulty: "Medium",
     formulas: [
@@ -378,9 +378,9 @@ export const topicsData: Topic[] = [
     ]
   },
   {
-    id: "clock",
+    id: "clocks",
     name: "Clock",
-    category: "logical-reasoning",
+    category: "reasoning",
     description: "Compute the angle between hour and minute hands, or calculate time gains/losses.",
     difficulty: "Medium",
     formulas: [
@@ -410,7 +410,7 @@ export const topicsData: Topic[] = [
   {
     id: "average",
     name: "Average",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Calculate arithmetic mean, weighted average, and values of elements within groups.",
     difficulty: "Easy",
     formulas: [
@@ -439,7 +439,7 @@ export const topicsData: Topic[] = [
   {
     id: "partnership",
     name: "Partnership",
-    category: "quantitative-aptitude",
+    category: "finance",
     description: "Determine profit-sharing distribution based on investment amounts and time periods.",
     difficulty: "Easy",
     formulas: [
@@ -472,9 +472,9 @@ export const topicsData: Topic[] = [
     ]
   },
   {
-    id: "boats-and-streams",
+    id: "basics-and-streams",
     name: "Boats and Streams",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Solve problems regarding upstream speed, downstream speed, speed of boat in still water, and speed of the stream.",
     difficulty: "Medium",
     formulas: [
@@ -519,7 +519,7 @@ export const topicsData: Topic[] = [
   {
     id: "ratio-and-proportion",
     name: "Ratio and Proportion",
-    category: "quantitative-aptitude",
+    category: "finance",
     description: "Solve ratios, fourth proportions, mean proportions, and distribute values between ratios.",
     difficulty: "Easy",
     formulas: [
@@ -554,7 +554,7 @@ export const topicsData: Topic[] = [
   {
     id: "probability",
     name: "Probability",
-    category: "logical-reasoning",
+    category: "logical",
     description: "Calculate odds, sample space, event counts, card selections, dice throws, and coin flips.",
     difficulty: "Medium",
     formulas: [
@@ -582,9 +582,9 @@ export const topicsData: Topic[] = [
     ]
   },
   {
-    id: "permutations-and-combinations",
+    id: "mixtures-and-combinations",
     name: "Permutation and Combination",
-    category: "logical-reasoning",
+    category: "logical",
     description: "Determine arrangements (nPr) and selections (nCr) of elements.",
     difficulty: "Medium",
     formulas: [
@@ -616,9 +616,9 @@ export const topicsData: Topic[] = [
     ]
   },
   {
-    id: "area",
+    id: "area-and-perimeter",
     name: "Area",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Calculate areas and perimeters of geometric shapes like squares, rectangles, triangles, and circles.",
     difficulty: "Easy",
     formulas: [
@@ -646,7 +646,7 @@ export const topicsData: Topic[] = [
   {
     id: "volume-and-surface-area",
     name: "Volume and Surface Area",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Determine volumes and surface areas of cylinders, spheres, cones, and cuboids.",
     difficulty: "Medium",
     formulas: [
@@ -675,7 +675,7 @@ export const topicsData: Topic[] = [
   {
     id: "logarithms",
     name: "Logarithms",
-    category: "logical-reasoning",
+    category: "math-logic",
     description: "Properties of logs, base changing calculations, and product rules.",
     difficulty: "Medium",
     formulas: [
@@ -702,7 +702,7 @@ export const topicsData: Topic[] = [
   {
     id: "hcf-and-lcm",
     name: "HCF and LCM",
-    category: "quantitative-aptitude",
+    category: "math-logic",
     description: "Find the Highest Common Factor (HCF) and Least Common Multiple (LCM) of numbers.",
     difficulty: "Easy",
     formulas: [
@@ -731,7 +731,7 @@ export const topicsData: Topic[] = [
   {
     id: "surds-and-indices",
     name: "Surds and Indices",
-    category: "quantitative-aptitude",
+    category: "math-logic",
     description: "Simplify expressions containing indices, exponents, roots, and surds.",
     difficulty: "Easy",
     formulas: [
@@ -759,7 +759,7 @@ export const topicsData: Topic[] = [
   {
     id: "pipes-and-cisterns",
     name: "Pipes and Cisterns",
-    category: "quantitative-aptitude",
+    category: "word-problems",
     description: "Calculate fill times, empty times, and combined flow rates of cistern inlets and outlets.",
     difficulty: "Medium",
     formulas: [

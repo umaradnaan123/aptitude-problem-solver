@@ -378,7 +378,7 @@ export const solveAptitudeProblem = (topicId: string, inputs: Record<string, str
       };
     }
 
-    case "calendar": {
+    case "calendars": {
       const d = Number(inputs.day) || 1;
       const m = Number(inputs.month) || 1;
       const y = Number(inputs.year) || 2000;
@@ -391,7 +391,7 @@ export const solveAptitudeProblem = (topicId: string, inputs: Record<string, str
       };
     }
 
-    case "clock": {
+    case "clocks": {
       const h = Number(inputs.hour) || 12;
       const m = Number(inputs.minute) || 0;
 
@@ -489,7 +489,7 @@ export const solveAptitudeProblem = (topicId: string, inputs: Record<string, str
       };
     }
 
-    case "boats-and-streams": {
+    case "basics-and-streams": {
       const u = Number(inputs.boatSpeed) || 0;
       const v = Number(inputs.streamSpeed) || 0;
 
@@ -566,7 +566,7 @@ export const solveAptitudeProblem = (topicId: string, inputs: Record<string, str
       };
     }
 
-    case "permutations-and-combinations": {
+    case "mixtures-and-combinations": {
       const n = Number(inputs.n) || 0;
       const r = Number(inputs.r) || 0;
 
@@ -602,7 +602,7 @@ export const solveAptitudeProblem = (topicId: string, inputs: Record<string, str
       };
     }
 
-    case "area": {
+    case "area-and-perimeter": {
       const a = Number(inputs.valA) || 0;
       const b = Number(inputs.valB) || 0;
 
