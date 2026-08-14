@@ -1022,21 +1022,50 @@ function QuestionDetailView({
     setCalcHistory(prev => [historyItem, ...prev].slice(0, 50));
   };
 
-  // Structured QAPage Schema
-  const qaSchema = {
+  // Structured LearningResource & Breadcrumb Schemas
+  const learningSchema = {
     "@context": "https://schema.org",
-    "@type": "QAPage",
-    "name": `How to calculate ${topic.name}`,
-    "mainEntity": {
-      "@type": "Question",
-      "name": `What is the formula and calculation method for ${topic.name}?`,
-      "text": topic.description,
-      "answerCount": 1,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": `Use the following formula: ${topic.formulas.map(f => `${f.name}: ${f.formula}`).join(', ')}. Details: ${topic.formulas.map(f => f.description).join(' ')}`
-      }
+    "@type": "LearningResource",
+    "name": `${topic.name} Formulas & Solved Problems`,
+    "description": topic.description,
+    "learningResourceType": "Study Guide",
+    "educationalLevel": "Placement Prep",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Organization",
+      "name": "Aptitude Solver Team",
+      "url": "https://aptitude-problem-solver.vercel.app/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aptitude Solver Team",
+      "url": "https://aptitude-problem-solver.vercel.app/"
     }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://aptitude-problem-solver.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": topic.category.replace('-', ' '),
+        "item": `https://aptitude-problem-solver.vercel.app/categories/${topic.category}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": topic.name,
+        "item": `https://aptitude-problem-solver.vercel.app/question/${topic.id}`
+      }
+    ]
   };
 
   return (
@@ -1045,7 +1074,7 @@ function QuestionDetailView({
         title={`${topic.name} Problems | Aptitude Questions & Solutions`} 
         description={`Calculate ${topic.name} instantly. Learn the formulas: ${topic.formulas.map(f => f.formula).join(', ')}, step-by-step solved examples and practice questions.`}
         canonicalUrl={`https://aptitude-problem-solver.vercel.app/question/${topic.id}`}
-        schema={qaSchema}
+        schema={[learningSchema, breadcrumbSchema]}
       />
 
       <Breadcrumbs paths={[{ name: topic.category.replace('-', ' '), link: `/categories/${topic.category}` }, { name: topic.name }]} />
