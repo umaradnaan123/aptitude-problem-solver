@@ -22,7 +22,7 @@ import {
 } from './data/seoContentData';
 
 // Valid GSC categories helper
-const VALID_CATEGORIES = ['company-wise', 'finance', 'logical', 'math-logic', 'reasoning', 'word-problems', 'verbal-ability', 'data-interpretation'];
+const VALID_CATEGORIES = ['quantitative-aptitude', 'logical-reasoning', 'data-interpretation', 'verbal-ability', 'company-wise'];
 
 // Helper component for routing tabs
 function NavLink({ to, children, active, onClick, ariaLabel }: { to: string; children: React.ReactNode; active: boolean; onClick?: () => void; ariaLabel?: string }) {
@@ -158,21 +158,29 @@ export default function App() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-1" aria-label="Main Navigation">
-            <NavLink to="/" active={location.pathname === '/' || location.pathname === '/dashboard'} ariaLabel="Dashboard">
+            <NavLink to="/" active={location.pathname === '/'} ariaLabel="Home">
               <Home className="w-4 h-4" />
               <span>Home</span>
             </NavLink>
-            <NavLink to="/calculators" active={location.pathname === '/calculators'} ariaLabel="Calculators">
+            <NavLink to="/quantitative-aptitude" active={location.pathname === '/quantitative-aptitude'} ariaLabel="Quantitative Aptitude">
+              <BookOpen className="w-4 h-4" />
+              <span>Quantitative Aptitude</span>
+            </NavLink>
+            <NavLink to="/logical-reasoning" active={location.pathname === '/logical-reasoning'} ariaLabel="Logical Reasoning">
+              <BookOpen className="w-4 h-4" />
+              <span>Logical Reasoning</span>
+            </NavLink>
+            <NavLink to="/data-interpretation" active={location.pathname === '/data-interpretation'} ariaLabel="Data Interpretation">
               <Calculator className="w-4 h-4" />
-              <span>Calculators</span>
+              <span>Data Interpretation</span>
             </NavLink>
-            <NavLink to="/tests" active={location.pathname === '/tests'} ariaLabel="Mock Tests">
+            <NavLink to="/verbal-ability" active={location.pathname === '/verbal-ability'} ariaLabel="Verbal Ability">
+              <BookOpen className="w-4 h-4" />
+              <span>Verbal Ability</span>
+            </NavLink>
+            <NavLink to="/company-wise" active={location.pathname === '/company-wise'} ariaLabel="Company Wise Preparation">
               <Award className="w-4 h-4" />
-              <span>Mock Tests</span>
-            </NavLink>
-            <NavLink to="/history" active={location.pathname === '/history'} ariaLabel="History and Reports">
-              <History className="w-4 h-4" />
-              <span>History</span>
+              <span>Company Wise</span>
             </NavLink>
             <NavLink to="/about" active={location.pathname === '/about'} ariaLabel="About Us">
               <Info className="w-4 h-4" />
@@ -212,9 +220,11 @@ export default function App() {
             <nav className="px-4 py-3 space-y-1" aria-label="Mobile Navigation">
               {[
                 { to: '/', label: 'Home', icon: Home },
-                { to: '/calculators', label: 'Calculators', icon: Calculator },
-                { to: '/tests', label: 'Mock Tests', icon: Award },
-                { to: '/history', label: 'History Logs', icon: History },
+                { to: '/quantitative-aptitude', label: 'Quantitative Aptitude', icon: BookOpen },
+                { to: '/logical-reasoning', label: 'Logical Reasoning', icon: BookOpen },
+                { to: '/data-interpretation', label: 'Data Interpretation', icon: Calculator },
+                { to: '/verbal-ability', label: 'Verbal Ability', icon: BookOpen },
+                { to: '/company-wise', label: 'Company Wise', icon: Award },
                 { to: '/about', label: 'About Us', icon: Info }
               ].map(tab => {
                 const Icon = tab.icon;
@@ -295,12 +305,40 @@ export default function App() {
           <Route path="/disclaimer" element={<DisclaimerView />} />
 
           {/* Clean path-based routing */}
-          <Route path="/categories/:categorySlug" element={
-            <CategoryDetailView 
+          <Route path="/quantitative-aptitude" element={<CategoryDetailView activeTopics={activeTopics} categorySlug="quantitative-aptitude" />} />
+          <Route path="/logical-reasoning" element={<CategoryDetailView activeTopics={activeTopics} categorySlug="logical-reasoning" />} />
+          <Route path="/data-interpretation" element={<CategoryDetailView activeTopics={activeTopics} categorySlug="data-interpretation" />} />
+          <Route path="/verbal-ability" element={<CategoryDetailView activeTopics={activeTopics} categorySlug="verbal-ability" />} />
+          <Route path="/company-wise" element={<CategoryDetailView activeTopics={activeTopics} categorySlug="company-wise" />} />
+
+          <Route path="/quantitative-aptitude/:questionSlug" element={
+            <QuestionDetailView 
               activeTopics={activeTopics}
+              setCalcHistory={setCalcHistory}
+              copyToClipboard={copyToClipboard}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
             />
           } />
-          <Route path="/question/:questionSlug" element={
+          <Route path="/logical-reasoning/:questionSlug" element={
+            <QuestionDetailView 
+              activeTopics={activeTopics}
+              setCalcHistory={setCalcHistory}
+              copyToClipboard={copyToClipboard}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+            />
+          } />
+          <Route path="/data-interpretation/:questionSlug" element={
+            <QuestionDetailView 
+              activeTopics={activeTopics}
+              setCalcHistory={setCalcHistory}
+              copyToClipboard={copyToClipboard}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+            />
+          } />
+          <Route path="/verbal-ability/:questionSlug" element={
             <QuestionDetailView 
               activeTopics={activeTopics}
               setCalcHistory={setCalcHistory}
@@ -332,20 +370,20 @@ export default function App() {
             <div>
               <span className="font-bold text-slate-700 dark:text-slate-300 block mb-3 uppercase tracking-wider text-[10px]">Categories</span>
               <ul className="space-y-2">
-                <li><Link to="/categories/finance" className="hover:underline">Finance Math</Link></li>
-                <li><Link to="/categories/logical" className="hover:underline">Logical Reasoning</Link></li>
-                <li><Link to="/categories/math-logic" className="hover:underline">Math Logic</Link></li>
-                <li><Link to="/categories/reasoning" className="hover:underline">Reasoning Practice</Link></li>
-                <li><Link to="/categories/word-problems" className="hover:underline">Word Problems</Link></li>
+                <li><Link to="/quantitative-aptitude" className="hover:underline">Quantitative Aptitude</Link></li>
+                <li><Link to="/logical-reasoning" className="hover:underline">Logical Reasoning</Link></li>
+                <li><Link to="/data-interpretation" className="hover:underline">Data Interpretation</Link></li>
+                <li><Link to="/verbal-ability" className="hover:underline">Verbal Ability</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">Company Wise Prep</Link></li>
               </ul>
             </div>
             <div>
               <span className="font-bold text-slate-700 dark:text-slate-300 block mb-3 uppercase tracking-wider text-[10px]">Company Prep</span>
               <ul className="space-y-2">
-                <li><Link to="/categories/company-wise" className="hover:underline">IT Placements Guide</Link></li>
-                <li><Link to="/categories/company-wise" className="hover:underline">TCS Aptitude Questions</Link></li>
-                <li><Link to="/categories/company-wise" className="hover:underline">Infosys Prep Guide</Link></li>
-                <li><Link to="/categories/company-wise" className="hover:underline">Wipro NLTH Prep</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">IT Placements Guide</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">TCS NQT Preparation</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">Infosys Prep Guide</Link></li>
+                <li><Link to="/company-wise" className="hover:underline">Wipro NLTH Prep</Link></li>
               </ul>
             </div>
             <div>
@@ -552,7 +590,7 @@ function DashboardView({
               filteredTopics.map(topic => (
                 <Link
                   key={topic.id}
-                  to={`/question/${topic.id}`}
+                  to={`/${topic.category}/${topic.id}`}
                   className="glass-card rounded-xl p-4 flex flex-col justify-between border border-slate-200 dark:border-slate-800 hover:border-violet-400 dark:hover:border-violet-500 transition"
                 >
                   <div>
@@ -804,7 +842,7 @@ function CalculatorsListView({
         {filteredTopics.map(topic => (
           <Link
             key={topic.id}
-            to={`/question/${topic.id}`}
+            to={`/${topic.category}/${topic.id}`}
             className="glass-card rounded-xl p-4 flex flex-col justify-between border border-slate-200 dark:border-slate-800 hover:border-violet-400 transition"
           >
             <div>
@@ -848,8 +886,14 @@ interface CategoryDetailViewProps {
   activeTopics: Topic[];
 }
 
-function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
-  const { categorySlug } = useParams<{ categorySlug: string }>();
+interface CategoryDetailViewProps {
+  activeTopics: Topic[];
+  categorySlug?: string;
+}
+
+function CategoryDetailView({ activeTopics, categorySlug: propCategorySlug }: CategoryDetailViewProps) {
+  const { categorySlug: paramCategorySlug } = useParams<{ categorySlug: string }>();
+  const categorySlug = propCategorySlug || paramCategorySlug;
 
   // Prevent routing collisions (Soft 404 handler)
   const isValidSlug = categorySlug && VALID_CATEGORIES.includes(categorySlug);
@@ -866,7 +910,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
   const relatedTopics = useMemo(() => {
     if (!categorySlug || !isValidSlug) return [];
     if (categorySlug === 'company-wise') {
-      return activeTopics.filter(t => t.category === 'finance' || t.category === 'logical' || t.category === 'reasoning' || t.category === 'word-problems');
+      return activeTopics.filter(t => t.category === 'quantitative-aptitude' || t.category === 'logical-reasoning');
     }
     return activeTopics.filter(t => t.category === categorySlug);
   }, [activeTopics, categorySlug, isValidSlug]);
@@ -881,7 +925,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
     "@type": "CollectionPage",
     "name": seoData.title,
     "description": seoData.subtitle,
-    "url": `https://aptitude-problem-solver.vercel.app/categories/${categorySlug}`,
+    "url": `https://aptitude-problem-solver.vercel.app/${categorySlug}`,
     "about": {
       "@type": "Thing",
       "name": categorySlug
@@ -890,7 +934,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
 
   return (
     <div className="space-y-6">
-      <SEOMeta title={seoData.title} description={seoData.subtitle || ''} canonicalUrl={`https://aptitude-problem-solver.vercel.app/categories/${categorySlug}`} schema={categorySchema} />
+      <SEOMeta title={seoData.title} description={seoData.subtitle || ''} canonicalUrl={`https://aptitude-problem-solver.vercel.app/${categorySlug}`} schema={categorySchema} />
       
       <Breadcrumbs paths={[{ name: seoData.title }]} />
       
@@ -936,7 +980,7 @@ function CategoryDetailView({ activeTopics }: CategoryDetailViewProps) {
           {relatedTopics.map(topic => (
             <Link
               key={topic.id}
-              to={`/question/${topic.id}`}
+              to={`/${topic.category}/${topic.id}`}
               className="glass-card rounded-xl p-4 flex flex-col justify-between border border-slate-200 dark:border-slate-800 hover:border-violet-400 transition"
             >
               <div>
@@ -1046,7 +1090,7 @@ function QuestionDetailView({
           "url": "https://aptitude-problem-solver.vercel.app/"
         },
         "datePublished": "2026-08-11T12:00:00+05:30",
-        "url": `https://aptitude-problem-solver.vercel.app/question/${topic.id}`,
+        "url": `https://aptitude-problem-solver.vercel.app/${topic.category}/${topic.id}`,
         "upvoteCount": 0
       }
     }
@@ -1066,13 +1110,13 @@ function QuestionDetailView({
         "@type": "ListItem",
         "position": 2,
         "name": topic.category.replace('-', ' '),
-        "item": `https://aptitude-problem-solver.vercel.app/categories/${topic.category}`
+        "item": `https://aptitude-problem-solver.vercel.app/${topic.category}`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": topic.name,
-        "item": `https://aptitude-problem-solver.vercel.app/question/${topic.id}`
+        "item": `https://aptitude-problem-solver.vercel.app/${topic.category}/${topic.id}`
       }
     ]
   };
@@ -1082,11 +1126,11 @@ function QuestionDetailView({
       <SEOMeta 
         title={`${topic.name} Problems | Aptitude Questions & Solutions`} 
         description={`Calculate ${topic.name} instantly. Learn the formulas: ${topic.formulas.map(f => f.formula).join(', ')}, step-by-step solved examples and practice questions.`}
-        canonicalUrl={`https://aptitude-problem-solver.vercel.app/question/${topic.id}`}
+        canonicalUrl={`https://aptitude-problem-solver.vercel.app/${topic.category}/${topic.id}`}
         schema={[qaSchema, breadcrumbSchema]}
       />
 
-      <Breadcrumbs paths={[{ name: topic.category.replace('-', ' '), link: `/categories/${topic.category}` }, { name: topic.name }]} />
+      <Breadcrumbs paths={[{ name: topic.category.replace('-', ' '), link: `/${topic.category}` }, { name: topic.name }]} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         

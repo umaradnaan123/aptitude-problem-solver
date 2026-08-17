@@ -36,7 +36,7 @@ if (!sitemapContent.includes('<loc>https://aptitude-problem-solver.vercel.app/</
 }
 
 // Check category coverage
-const expectedCategories = ['finance', 'word-problems', 'logical', 'math-logic', 'reasoning', 'company-wise', 'verbal-ability', 'data-interpretation'];
+const expectedCategories = ['quantitative-aptitude', 'logical-reasoning', 'data-interpretation', 'verbal-ability', 'company-wise'];
 expectedCategories.forEach(cat => {
   if (!seoContent.includes(`"${cat}":`) && !seoContent.includes(`'${cat}':`)) {
     console.error(`[FAIL] seoContentData.ts is missing configuration for category: ${cat}`);
@@ -58,24 +58,23 @@ if (sitemapContent.includes('#/')) {
 const requiredGscUrls = [
   'https://aptitude-problem-solver.vercel.app/about',
   'https://aptitude-problem-solver.vercel.app/calculators',
-  'https://aptitude-problem-solver.vercel.app/categories/company-wise',
-  'https://aptitude-problem-solver.vercel.app/categories/finance',
-  'https://aptitude-problem-solver.vercel.app/categories/logical',
-  'https://aptitude-problem-solver.vercel.app/categories/math-logic',
-  'https://aptitude-problem-solver.vercel.app/categories/reasoning',
-  'https://aptitude-problem-solver.vercel.app/categories/word-problems',
-  'https://aptitude-problem-solver.vercel.app/question/area-and-perimeter',
-  'https://aptitude-problem-solver.vercel.app/question/basics-and-streams',
-  'https://aptitude-problem-solver.vercel.app/question/calendars',
-  'https://aptitude-problem-solver.vercel.app/question/clocks',
-  'https://aptitude-problem-solver.vercel.app/question/compound-interest',
-  'https://aptitude-problem-solver.vercel.app/question/mixtures-and-combinations',
-  'https://aptitude-problem-solver.vercel.app/question/probability',
-  'https://aptitude-problem-solver.vercel.app/question/profit-and-loss',
-  'https://aptitude-problem-solver.vercel.app/question/ratio-and-proportion',
-  'https://aptitude-problem-solver.vercel.app/question/time-and-distance',
-  'https://aptitude-problem-solver.vercel.app/question/time-and-work',
-  'https://aptitude-problem-solver.vercel.app/question/volume-and-surface-area',
+  'https://aptitude-problem-solver.vercel.app/company-wise',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude',
+  'https://aptitude-problem-solver.vercel.app/logical-reasoning',
+  'https://aptitude-problem-solver.vercel.app/data-interpretation',
+  'https://aptitude-problem-solver.vercel.app/verbal-ability',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/area-and-perimeter',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/basics-and-streams',
+  'https://aptitude-problem-solver.vercel.app/logical-reasoning/calendars',
+  'https://aptitude-problem-solver.vercel.app/logical-reasoning/clocks',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/compound-interest',
+  'https://aptitude-problem-solver.vercel.app/logical-reasoning/mixtures-and-combinations',
+  'https://aptitude-problem-solver.vercel.app/logical-reasoning/probability',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/profit-and-loss',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/ratio-and-proportion',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/time-and-distance',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/time-and-work',
+  'https://aptitude-problem-solver.vercel.app/quantitative-aptitude/volume-and-surface-area',
   'https://aptitude-problem-solver.vercel.app/tests'
 ];
 
