@@ -3,81 +3,87 @@
   <!-- Core Static Pages -->
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/</loc>
-    <lastmod>2026-08-17</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/calculators</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/tests</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/about</loc>
-    <lastmod>2026-08-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/contact</loc>
-    <lastmod>2026-08-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aptitude-problem-solver.vercel.app/editorial-policy</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/privacy-policy</loc>
-    <lastmod>2026-08-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/terms</loc>
-    <lastmod>2026-08-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/disclaimer</loc>
-    <lastmod>2026-08-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
-  
+
   <!-- Category Pages -->
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/logical-reasoning</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/data-interpretation</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/verbal-ability</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/company-wise</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -85,169 +91,169 @@
   <!-- Question Solver Pages -->
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/simple-interest</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/compound-interest</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/problems-on-trains</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/time-and-distance</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/time-and-work</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/profit-and-loss</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/percentage</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/problems-on-ages</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/logical-reasoning/calendars</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/logical-reasoning/clocks</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/average</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/partnership</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/basics-and-streams</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/ratio-and-proportion</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/logical-reasoning/probability</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/logical-reasoning/mixtures-and-combinations</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/area-and-perimeter</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/volume-and-surface-area</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/logarithms</loc>
-    <lastmod>2026-08-17</lastmod>
+    <loc>https://aptitude-problem-solver.vercel.app/logical-reasoning/logarithms</loc>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/hcf-and-lcm</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/surds-and-indices</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/quantitative-aptitude/pipes-and-cisterns</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/verbal-ability/grammar</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/verbal-ability/synonyms-antonyms</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/verbal-ability/reading-comprehension</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/data-interpretation/tables</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/data-interpretation/bar-graphs</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aptitude-problem-solver.vercel.app/data-interpretation/pie-charts</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -5,6 +5,7 @@ export interface SEOMetaProps {
   description: string;
   canonicalUrl?: string;
   ogType?: 'website' | 'article';
+  ogImage?: string;
   schema?: Record<string, any> | Record<string, any>[];
   noindex?: boolean;
 }
@@ -14,29 +15,29 @@ export default function SEOMeta({
   description,
   canonicalUrl = "https://aptitude-problem-solver.vercel.app/",
   ogType = "website",
+  ogImage = "https://aptitude-problem-solver.vercel.app/favicon.svg",
   schema,
   noindex = false
 }: SEOMetaProps) {
   useEffect(() => {
-    // Update Robots Meta for noindex support
+    // 1. Update Robots Meta Tag
     let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      document.head.appendChild(robotsMeta);
+    }
+    
     if (noindex) {
-      if (!robotsMeta) {
-        robotsMeta = document.createElement('meta');
-        robotsMeta.setAttribute('name', 'robots');
-        document.head.appendChild(robotsMeta);
-      }
       robotsMeta.setAttribute('content', 'noindex, nofollow');
     } else {
-      if (robotsMeta) {
-        robotsMeta.setAttribute('content', 'index, follow');
-      }
+      robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     }
 
-    // Update Document Title
+    // 2. Update Document Title
     document.title = title;
 
-    // Update Meta Description
+    // 3. Update Meta Description
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -45,7 +46,7 @@ export default function SEOMeta({
     }
     metaDescription.setAttribute('content', description);
 
-    // Update Canonical Link
+    // 4. Update Canonical Link
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
@@ -54,7 +55,7 @@ export default function SEOMeta({
     }
     canonicalLink.setAttribute('href', canonicalUrl);
 
-    // Update OpenGraph Title
+    // 5. OpenGraph Title
     let ogTitle = document.querySelector('meta[property="og:title"]');
     if (!ogTitle) {
       ogTitle = document.createElement('meta');
@@ -63,7 +64,7 @@ export default function SEOMeta({
     }
     ogTitle.setAttribute('content', title);
 
-    // Update OpenGraph Description
+    // 6. OpenGraph Description
     let ogDesc = document.querySelector('meta[property="og:description"]');
     if (!ogDesc) {
       ogDesc = document.createElement('meta');
@@ -72,7 +73,7 @@ export default function SEOMeta({
     }
     ogDesc.setAttribute('content', description);
 
-    // Update OpenGraph URL
+    // 7. OpenGraph URL
     let ogUrl = document.querySelector('meta[property="og:url"]');
     if (!ogUrl) {
       ogUrl = document.createElement('meta');
@@ -81,7 +82,7 @@ export default function SEOMeta({
     }
     ogUrl.setAttribute('content', canonicalUrl);
 
-    // Update OpenGraph Type
+    // 8. OpenGraph Type
     let ogTypeMeta = document.querySelector('meta[property="og:type"]');
     if (!ogTypeMeta) {
       ogTypeMeta = document.createElement('meta');
@@ -90,25 +91,25 @@ export default function SEOMeta({
     }
     ogTypeMeta.setAttribute('content', ogType);
 
-    // Update Twitter Title
-    let twitterTitle = document.querySelector('meta[name="twitter:title"]');
-    if (!twitterTitle) {
-      twitterTitle = document.createElement('meta');
-      twitterTitle.setAttribute('name', 'twitter:title');
-      document.head.appendChild(twitterTitle);
+    // 9. OpenGraph Site Name
+    let ogSiteName = document.querySelector('meta[property="og:site_name"]');
+    if (!ogSiteName) {
+      ogSiteName = document.createElement('meta');
+      ogSiteName.setAttribute('property', 'og:site_name');
+      document.head.appendChild(ogSiteName);
     }
-    twitterTitle.setAttribute('content', title);
+    ogSiteName.setAttribute('content', 'Aptitude Problem Solver');
 
-    // Update Twitter Description
-    let twitterDesc = document.querySelector('meta[name="twitter:description"]');
-    if (!twitterDesc) {
-      twitterDesc = document.createElement('meta');
-      twitterDesc.setAttribute('name', 'twitter:description');
-      document.head.appendChild(twitterDesc);
+    // 10. OpenGraph Image
+    let ogImageMeta = document.querySelector('meta[property="og:image"]');
+    if (!ogImageMeta) {
+      ogImageMeta = document.createElement('meta');
+      ogImageMeta.setAttribute('property', 'og:image');
+      document.head.appendChild(ogImageMeta);
     }
-    twitterDesc.setAttribute('content', description);
+    ogImageMeta.setAttribute('content', ogImage);
 
-    // Update Twitter Card
+    // 11. Twitter Card
     let twitterCard = document.querySelector('meta[name="twitter:card"]');
     if (!twitterCard) {
       twitterCard = document.createElement('meta');
@@ -117,7 +118,34 @@ export default function SEOMeta({
     }
     twitterCard.setAttribute('content', 'summary_large_image');
 
-    // Update JSON-LD Schema
+    // 12. Twitter Title
+    let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (!twitterTitle) {
+      twitterTitle = document.createElement('meta');
+      twitterTitle.setAttribute('name', 'twitter:title');
+      document.head.appendChild(twitterTitle);
+    }
+    twitterTitle.setAttribute('content', title);
+
+    // 13. Twitter Description
+    let twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    if (!twitterDesc) {
+      twitterDesc = document.createElement('meta');
+      twitterDesc.setAttribute('name', 'twitter:description');
+      document.head.appendChild(twitterDesc);
+    }
+    twitterDesc.setAttribute('content', description);
+
+    // 14. Twitter Image
+    let twitterImage = document.querySelector('meta[name="twitter:image"]');
+    if (!twitterImage) {
+      twitterImage = document.createElement('meta');
+      twitterImage.setAttribute('name', 'twitter:image');
+      document.head.appendChild(twitterImage);
+    }
+    twitterImage.setAttribute('content', ogImage);
+
+    // 15. JSON-LD Schema
     let scriptTag = document.getElementById('jsonld-seo') as HTMLScriptElement;
     if (scriptTag) {
       scriptTag.textContent = JSON.stringify(schema || {});
@@ -130,13 +158,12 @@ export default function SEOMeta({
     }
 
     return () => {
-      // Clean up schema on unmount to avoid stale schema on route changes
       const currentScript = document.getElementById('jsonld-seo');
       if (currentScript) {
         currentScript.textContent = '{}';
       }
     };
-  }, [title, description, canonicalUrl, ogType, schema, noindex]);
+  }, [title, description, canonicalUrl, ogType, ogImage, schema, noindex]);
 
   return null;
 }

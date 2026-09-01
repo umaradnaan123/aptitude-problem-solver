@@ -303,6 +303,7 @@ export default function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicyView />} />
           <Route path="/terms" element={<TermsView />} />
           <Route path="/disclaimer" element={<DisclaimerView />} />
+          <Route path="/editorial-policy" element={<EditorialPolicyView />} />
 
           {/* Clean path-based routing */}
           <Route path="/quantitative-aptitude" element={<CategoryDetailView activeTopics={activeTopics} categorySlug="quantitative-aptitude" />} />
@@ -391,6 +392,7 @@ export default function App() {
               <ul className="space-y-2">
                 <li><Link to="/about" className="hover:underline">About Editorial</Link></li>
                 <li><Link to="/contact" className="hover:underline">Contact Support</Link></li>
+                <li><Link to="/editorial-policy" className="hover:underline">Editorial Policy</Link></li>
                 <li><Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link></li>
                 <li><Link to="/terms" className="hover:underline">Terms of Use</Link></li>
                 <li><Link to="/disclaimer" className="hover:underline">Disclaimer</Link></li>
@@ -1749,7 +1751,44 @@ function DisclaimerView() {
   );
 }
 
-// 12. NOT FOUND VIEW
+// 12. EDITORIAL POLICY VIEW
+function EditorialPolicyView() {
+  const title = "Editorial & Quality Policy - Aptitude Solver";
+  const desc = "Learn about our educational content creation process, calculation verification methods, and editorial quality standards.";
+
+  return (
+    <div className="space-y-6">
+      <SEOMeta title={title} description={desc} canonicalUrl="https://aptitude-problem-solver.vercel.app/editorial-policy" />
+      <Breadcrumbs paths={[{ name: "Editorial Policy" }]} />
+      
+      <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-4 max-w-3xl leading-relaxed text-sm">
+        <h1 className="text-3xl font-black">Editorial & Quality Policy</h1>
+        <p className="text-xs text-slate-500">Last updated: August 25, 2026</p>
+        
+        <p>
+          At <strong>Aptitude Problem Solver</strong>, our mission is to provide accurate, transparent, and step-by-step mathematical learning tools for students and placement candidates.
+        </p>
+
+        <h2 className="font-extrabold text-lg mt-4">1. Content Creation & Formula Standards</h2>
+        <p>
+          Every mathematical formula, step-by-step solver, and solved example on our platform is authored and reviewed according to standard undergraduate and competitive examination standards (such as IBPS PO, CAT, GRE, GMAT, and campus IT placement syllabus).
+        </p>
+
+        <h2 className="font-extrabold text-lg mt-4">2. Calculation Verification</h2>
+        <p>
+          Our computational tools are algorithmically unit-tested to ensure accurate algebraic solutions. Interactive steps break down complex calculations into logical arithmetic operations, allowing users to verify each step independently.
+        </p>
+
+        <h2 className="font-extrabold text-lg mt-4">3. Correction & Update Process</h2>
+        <p>
+          We continuously update our content and solvers. If you spot a formula discrepancy or typographical error, please contact us via our Contact Page. Corrections are reviewed and deployed promptly.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// 13. NOT FOUND VIEW
 function NotFoundView() {
   const title = "404 Page Not Found - Aptitude Solver";
   const desc = "Sorry, the requested page does not exist. Back to dashboard.";
