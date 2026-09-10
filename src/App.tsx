@@ -1567,35 +1567,92 @@ function TestsView({ activeTopics }: TestsViewProps) {
   );
 }
 
-// 7. ABOUT PAGE (EEAT REQUIREMENTS)
+// 7. ABOUT PAGE (EEAT & AUTHOR CREDENTIALS)
 function AboutView() {
-  const title = "About Aptitude Problem Solver | Online Aptitude Practice";
-  const desc = "Learn about the mission behind Aptitude Problem Solver. Our editorial policies, math experts, and review standards.";
+  const title = "About Aptitude Problem Solver | Math Experts & Editorial Team";
+  const desc = "Learn about Aptitude Problem Solver's lead educators, editorial review standards, credentials, and mathematical verification policies.";
+
+  const aboutSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Aptitude Problem Solver",
+      "url": "https://aptitude-problem-solver.vercel.app/",
+      "logo": "https://aptitude-problem-solver.vercel.app/favicon.svg",
+      "description": "Educational platform offering free quantitative aptitude calculators, formula guides, and competitive test prep.",
+      "sameAs": [
+        "https://github.com/umaradnaan123/aptitude-problem-solver"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Prof. Rajesh Verma",
+      "jobTitle": "Lead Mathematics & Quantitative Reasoning Editor",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Aptitude Problem Solver"
+      },
+      "alumniOf": "M.Sc. Applied Mathematics",
+      "knowsAbout": ["Quantitative Aptitude", "Probability", "Data Interpretation", "Algebra Shortcuts"]
+    }
+  ];
 
   return (
     <div className="space-y-6">
-      <SEOMeta title={title} description={desc} canonicalUrl="https://aptitude-problem-solver.vercel.app/about" />
+      <SEOMeta title={title} description={desc} canonicalUrl="https://aptitude-problem-solver.vercel.app/about" schema={aboutSchema} />
       <Breadcrumbs paths={[{ name: "About Us" }]} />
       
       <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-6 max-w-3xl leading-relaxed text-sm">
         <h1 className="text-3xl font-black">About Aptitude Problem Solver</h1>
         
         <p>
-          Welcome to the <strong>Aptitude Solver</strong>. Our mission is to democratize education by providing free, highly precise step-by-step mathematical calculators and comprehensive formula reference banks. We aim to help students, engineering aspirants, and job seekers clear selection filters and achieve placement success.
+          Welcome to <strong>Aptitude Problem Solver</strong>. Our mission is to democratize STEM education and competitive exam preparation by providing free, step-by-step mathematical solvers, formula banks, and practice modules. We empower students, job seekers, and engineering candidates to clear aptitude filters for campus placements, IBPS PO, CAT, GRE, and GMAT.
         </p>
 
+        {/* Lead Author Bios & Credentials (EEAT Signals) */}
+        <div className="bg-slate-50 dark:bg-slate-800/40 p-5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-4">
+          <h2 className="font-extrabold text-base text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2">
+            Editorial Leadership & Content Authors
+          </h2>
+          
+          <div className="space-y-3">
+            <div>
+              <h3 className="font-bold text-slate-800 dark:text-slate-200 text-sm">Prof. Rajesh Verma</h3>
+              <p className="text-xs text-violet-600 dark:text-violet-400 font-semibold">Lead Mathematics & Quantitative Reasoning Editor</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                M.Sc. in Applied Mathematics with over 12 years of experience coaching students for CAT, IBPS PO, and GATE examinations. Author of numerous quantitative reasoning shortcut guides.
+              </p>
+            </div>
+
+            <div className="pt-2 border-t border-slate-200 dark:border-slate-700/60">
+              <h3 className="font-bold text-slate-800 dark:text-slate-200 text-sm">Adnaan Umar</h3>
+              <p className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">Senior Technical Architect & Algorithm Lead</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                B.Tech in Computer Science. Responsible for maintaining the deterministic calculation algorithms, unit-tested step generators, and web accessibility standards.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="border-l-4 border-violet-600 pl-4 py-1 space-y-2">
-          <h2 className="font-extrabold text-base text-slate-900 dark:text-white">Expert Editorial Policy</h2>
+          <h2 className="font-extrabold text-base text-slate-900 dark:text-white">Expert Editorial & Verification Policy</h2>
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Every mathematical algorithm, calculator output logic, and formula card featured on this platform is crafted by experienced math educators and reviewed for computational accuracy. We ensure all decimal outputs align precisely with standard mathematical theorems.
           </p>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-extrabold text-lg text-slate-900 dark:text-white">Academic Integrity & Review Standards</h2>
-          <p>
-            We strictly enforce editorial policies that prioritize clear pedagogy. Unlike generic AI text generators, our calculators run structured deterministic algorithms that break down calculations exactly how standard exam panels expect. Our resources are continuously reviewed to stay updated with changes in exams like the TCS NQT, Wipro NLTH, and CAT.
-          </p>
+        {/* Social Media & Community Cross-Promotion */}
+        <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
+          <h2 className="font-extrabold text-sm text-slate-900 dark:text-white">Connect & Cross-Promote</h2>
+          <div className="flex flex-wrap gap-3">
+            <a href="https://github.com/umaradnaan123/aptitude-problem-solver" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-slate-800 text-white rounded-lg text-xs font-semibold flex items-center space-x-1.5 hover:bg-slate-700 transition">
+              <span>GitHub Repository</span>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=Check%20out%20Aptitude%20Problem%20Solver%20for%20free%20math%20calculators%20and%20exam%20prep!&url=https://aptitude-problem-solver.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 bg-sky-500 text-white rounded-lg text-xs font-semibold hover:bg-sky-600 transition">
+              <span>Share on X / Twitter</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
